@@ -1,0 +1,1 @@
+function inciarApp(){dtable()}function dtable(){$("#tabla_id").DataTable({pageLenth:3,lengthMenu:[[8,15.25,50],[8,15.25,50]],language:{url:"https://cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"}})}document.addEventListener("DOMContentLoaded",(function(){inciarApp()}));
