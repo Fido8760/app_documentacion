@@ -57,13 +57,11 @@ class UnidadController {
 
     public static function eliminar() {
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = $_POST['id'];
             $unidad = Unidad::find($id);
             $unidad->eliminar();
             header('Location: /unidades');
         }
     }
-
-
 }

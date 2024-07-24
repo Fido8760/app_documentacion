@@ -27,10 +27,10 @@
                             <td><?php echo $unidad->tipo_unidad;?></td>
                             <td><?php echo $unidad->u_marca;?></td>
                             <td>
-                                <form action="/unidades/eliminar" method="POST">
+                                <form action="/unidades/eliminar" method="POST" class="form-eliminar">
                                     <a class="btn btn-info" href="/unidades/actualizar?id=<?php echo $unidad->id; ?>" role="button">Editar</a>
                                     <input type="hidden" name="id" value="<?php echo $unidad->id; ?>">
-                                    <input type="submit" value="Eliminar" class="btn btn-danger">
+                                    <input type="submit" value="Eliminar" class="btn btn-danger btn-eliminar">
                                 </form>
                             </td>
                         </tr>
@@ -41,13 +41,14 @@
             </div>
         </div>
         <div class="card-footer">
-        <button class="btn btn-success" onclick="exportarExcel()">Exportar a Excel</button>
+            <button class="btn btn-success" onclick="exportarExcel()">Exportar a Excel</button>
         </div>
     </div>
 </main>
 
 <?php
     $script = "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     <script src='build/js/app.js'></script>
     "
 ?>
