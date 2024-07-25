@@ -1,14 +1,6 @@
-<br>
-<div class="card">
-    <div class="card-header">
-        <h3>Agregar Unidades</h3>
-    </div>
+
+    
     <div class="card-body">
-        <?php if (isset($mensaje_dup)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <strong><?php echo $mensaje_dup; ?></strong>
-            </div>
-        <?php } ?>
         <div class="card-body">
             <div class="mb-3">
                 <label for="no_unidad" class="form-label">No. de Unidad: </label>
@@ -58,7 +50,5 @@
                 <label for="no_motor" class="form-label">Motor: </label>
                 <input type="text" class="form-control" name="no_motor" id="no_motor" placeholder="Escriba el numero de motor" value="<?php echo $unidad->no_motor; ?>">
             </div>
-
-            </form>
         </div>
     </div>

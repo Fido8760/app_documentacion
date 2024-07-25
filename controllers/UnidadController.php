@@ -10,7 +10,7 @@ class UnidadController {
 
         $unidades = Unidad::all();
         
-        $router->render('unidades/unidades', [
+        $router->render('/unidades/unidades', [
             'unidades' => $unidades
         ]);
     }

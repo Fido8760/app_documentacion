@@ -2,17 +2,17 @@
 <main class="container">
 <?php include_once __DIR__ . '/../template/alertas.php' ?>
     <div class="card">
-        <form action="/unidades/crear" method="post">
+        <form method="post">
             <div class="card-header">
-                <h3>Crear Unidad</h3>
+                <h3>Actualizar  Caja</h3>
             </div>
             <?php include __DIR__ . '/formulario.php' ?>
             <div class="card-footer">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-success">Agregar</button>
-                    <a class="btn btn-primary" href="/unidades">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <a class="btn btn-primary" href="/cajas">Cancelar</a>
                 </div>
-            </div>  
+            </div>
         </form>
     </div>
 </main>

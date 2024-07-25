@@ -44,16 +44,3 @@ function borrar() {
     } );
     
 }
-
-function mostrarMensaje() {
-    const mensaje = '<?php echo $_SESSION['mensaje'] ?? ''; ?>';
-    if (mensaje) {
-        Swal.fire({
-            title: 'Eliminación exitosa',
-            text: mensaje,
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-        <?php unset($_SESSION['mensaje']); // Elimina el mensaje de la sesión ?>
-    }
-}

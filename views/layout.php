@@ -42,8 +42,8 @@ if(!isset($inicio)){
         <div class="nav navbar-nav">
 
             <a class="nav-item nav-link" href="../secciones/index.php" aria-current="page">Home</a>
-            <a class="nav-item nav-link" href="<?php $url_base; ?> ../unidades/index.php">Unidades</a>
-            <a class="nav-item nav-link" href="<?php $url_base; ?> ../cajas/index.php">Cajas</a>
+            <a class="nav-item nav-link" href="/unidades">Unidades</a>
+            <a class="nav-item nav-link" href="/cajas">Cajas</a>
             <a class="nav-item nav-link" href="<?php $url_base; ?> ../secciones/vista_polizas.php">Pólizas de seguros</a>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Verificaciones</a>
