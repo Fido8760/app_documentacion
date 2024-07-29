@@ -7,14 +7,23 @@ use MVC\Router;
 
 class CajaController {
     public static function index(Router $router) {
+        session_start();
+        isAuth();
+        $showNavbar = true;
+
         $cajas = Caja::all();
 
-        $router->render('/cajas/cajas', [
-            'cajas' => $cajas
+        $router->render('cajas/cajas', [
+            'cajas' => $cajas,
+            'showNavbar' => $showNavbar
         ]);
     }
 
     public static function crear(Router $router) {
+        session_start();
+        isAuth();
+        $showNavbar = true;
+
         $caja = new Caja;
         $alertas = [];
 
@@ -30,11 +39,16 @@ class CajaController {
 
         $router->render('cajas/crear', [
             'caja' => $caja,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'showNavbar' => $showNavbar
         ]);
     }
 
     public static function actualizar(Router $router){
+        session_start();
+        isAuth();
+        $showNavbar = true;
+
         if(!is_numeric($_GET['id'])) return;
         $caja = Caja::find($_GET['id']);
         $alertas = [];
@@ -51,11 +65,15 @@ class CajaController {
 
         $router->render('cajas/actualizar', [
             'caja' => $caja,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'showNavbar' => $showNavbar
         ]);
 
     }
     public static function eliminar(){
+        session_start();
+        isAuth();
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $caja = Caja::find($id);

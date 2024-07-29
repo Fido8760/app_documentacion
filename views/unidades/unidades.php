@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
 
-                    <?php foreach($unidades as $unidad){?>
+                    <?php foreach($unidades as $unidad):?>
                         <tr class="">
                             <td scope="row"><?php echo $unidad->id;?></td>
                             <td><button type="button" class="btn btn-secondary" role ="button" ><?php echo $unidad->no_unidad;?></button></td>
@@ -35,7 +35,7 @@
                                 </form>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php endforeach ?>
 
                     </tbody>
                 </table>
@@ -49,7 +49,6 @@
 
 <?php
     $script = "
-    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-    <script src='build/js/app.js'></script>
+    
     "
 ?>

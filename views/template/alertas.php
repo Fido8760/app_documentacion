@@ -1,11 +1,12 @@
 <?php
-foreach($alertas as $key => $mensajes) {
+foreach($alertas as $tipo => $mensajes) {
     foreach($mensajes as $mensaje) {
+        $alertClass = $tipo === 'exito' ? 'alert-success' : 'alert-danger';
 ?>
-<div class="alert alert-danger" role="alert">
-<?php echo $mensaje; ?>
-</div>
-    
+        <br>
+        <div class="alert <?php echo $alertClass; ?>" role="alert">
+            <?php echo $mensaje; ?>
+        </div>
 <?php
     }
 }

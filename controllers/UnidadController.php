@@ -7,15 +7,21 @@ use MVC\Router;
 
 class UnidadController {
     public static function index(Router $router) {
-
+        session_start();
+        isAuth();
         $unidades = Unidad::all();
+        $showNavbar = true;
         
-        $router->render('/unidades/unidades', [
-            'unidades' => $unidades
+        $router->render('unidades/unidades', [
+            'unidades' => $unidades,
+            'showNavbar' => $showNavbar
         ]);
     }
 
     public static function crear(Router $router) {
+        session_start();
+        isAuth();
+        $showNavbar = true;
         $unidad = new Unidad;
         $alertas = [];
 
@@ -31,11 +37,14 @@ class UnidadController {
 
         $router->render('unidades/crear',[
             'unidad' => $unidad,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'showNavbar' => $showNavbar
         ]);
     }
     public static function actualizar(Router $router) {
-
+        session_start();
+        isAuth();
+        $showNavbar = true;
         if(!is_numeric($_GET['id'])) return;
         $unidad = Unidad::find($_GET['id']);
         $alertas = [];
@@ -51,12 +60,14 @@ class UnidadController {
 
         $router->render('unidades/actualizar', [
             'unidad' => $unidad,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'showNavbar' => $showNavbar
         ]);
     }
 
     public static function eliminar() {
-
+        session_start();
+        isAuth();
          if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = $_POST['id'];
             $unidad = Unidad::find($id);
