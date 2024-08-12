@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\CajaController;
 use Controllers\LoginController;
+use Controllers\PolizaController;
 use Controllers\PrincipalController;
 use Controllers\UnidadController;
 use MVC\Router;
@@ -32,11 +33,19 @@ $router->post('/recuperar', [LoginController::class, 'recuperar']);
 
 //Crud Unidades
 $router->get('/unidades', [UnidadController::class, 'index']);
-$router->get('/unidades/crear', [UnidadController::class, 'crear']);
-$router->post('/unidades/crear', [UnidadController::class, 'crear']);
-$router->get('/unidades/actualizar', [UnidadController::class, 'actualizar']);
-$router->post('/unidades/actualizar', [UnidadController::class, 'actualizar']);
-$router->post('/unidades/eliminar', [UnidadController::class, 'eliminar']);
+// $router->get('/unidades/crear', [UnidadController::class, 'crear']);
+// $router->post('/unidades/crear', [UnidadController::class, 'crear']);
+// $router->get('/unidades/actualizar', [UnidadController::class, 'actualizar']);
+// $router->post('/unidades/actualizar', [UnidadController::class, 'actualizar']);
+// $router->post('/unidades/eliminar', [UnidadController::class, 'eliminar']);
+
+//Crud Unidades
+
+$router->get('/api/unidades', [UnidadController::class, 'index']);
+$router->post('/api/unidad', [UnidadController::class, 'crear']);
+$router->post('/api/unidad/actualizar', [UnidadController::class, 'crear']);
+$router->post('/api/unidad/eliminar', [UnidadController::class, 'actualizar']);
+
 
 //CRUD Cajas
 
@@ -49,6 +58,16 @@ $router->post('/cajas/eliminar', [CajaController::class, 'eliminar']);
 
 //CRUD Pólizas
 
-$router->get();
+$router->get('/polizas', [PolizaController::class, 'index']);
+$router->post('/polizas/seleccionar-tipo-poliza', [PolizaController::class, 'seleccionarTipoPoliza']);
+$router->get('/polizas/crear-poliza-vehicular', [PolizaController::class, 'crearPolizaVehicular']);
+$router->post('/polizas/crear-poliza-vehicular', [PolizaController::class, 'crearPolizaVehicular']);
+$router->get('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearPolizaRemolque']);
+
+$router->get('/polizas/crear', [PolizaController::class, 'crear']);
+$router->post('/polizas/crear', [PolizaController::class, 'crear']);
+$router->get('/polizas/actualizar', [PolizaController::class, 'actualizar']);
+$router->post('/polizas/actualizar', [PolizaController::class, 'actualizar']);
+$router->post('/polizas/eliminar', [PolizaController::class, 'eliminar']);
 
 $router->comprobarRutas();

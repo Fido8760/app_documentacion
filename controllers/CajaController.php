@@ -37,7 +37,7 @@ class CajaController {
             }
         }
 
-        $router->render('cajas/crear', [
+        $router->render('cajas/crear-caja', [
             'caja' => $caja,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar

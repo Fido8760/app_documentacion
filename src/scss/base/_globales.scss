@@ -1,11 +1,7 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-    height: 100%;
-}
+
 body {
     min-height: 100%;
     @include m.tablet {
@@ -14,8 +10,6 @@ body {
     display: flex;
     flex-direction: column;
     background-color: v.$negro;
-    color: v.$blanco;
-    font-family: v.$fuente_principal;
     font-size: 1.6rem;
 }
 *, *:before, *:after {

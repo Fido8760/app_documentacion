@@ -123,7 +123,6 @@ class ActiveRecord {
     }
 
     //Consulta plana de SQL
-
     public static function SQL($query) {
         $resultado = self::consultarSQL($query);
         return $resultado;

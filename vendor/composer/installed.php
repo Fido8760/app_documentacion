@@ -3,7 +3,7 @@
         'name' => 'amd_025/appsalon',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '4372f5809166d0f2a74a65a150c1fa05adcaaf6b',
+        'reference' => '1726da692252f080b7b33b13c328058f01e1c0bd',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'amd_025/appsalon' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4372f5809166d0f2a74a65a150c1fa05adcaaf6b',
+            'reference' => '1726da692252f080b7b33b13c328058f01e1c0bd',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

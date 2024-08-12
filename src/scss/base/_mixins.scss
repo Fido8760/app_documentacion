@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use 'base/variables' as v;
 
 /** Media Queries **/
 @mixin telefono {
@@ -22,9 +22,7 @@
     background-color: $bgColor;
     padding: 1.5rem 4rem;
     color: $colorTexto;
-    margin-top: 2rem;
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: 1.6rem;
     display: inline-block;
     font-weight: 700;
     border: none;
@@ -33,8 +31,6 @@
     text-align: center;
     display: block;
     width: 100%;
-    margin: 5rem 0;
-
     @include tablet {
         width: auto;
     }
@@ -48,4 +44,18 @@
     display: grid;
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin textoDegradado($color) {
+    background: linear-gradient(to right, $color 0%, lighten($color, 30%) 100% );
+    color: transparent;
+    background-clip: text;
+    text-align: center;
+    font-size: 7rem;
+
+    @include tablet {
+        font-size: 10rem;
+    }
+
+    
 }

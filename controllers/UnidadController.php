@@ -9,12 +9,18 @@ class UnidadController {
     public static function index(Router $router) {
         session_start();
         isAuth();
+        $alertas = [];
         $unidades = Unidad::all();
+
+        
+
+        //echo json_encode(['unidades' => $unidades]);
         $showNavbar = true;
         
         $router->render('unidades/unidades', [
             'unidades' => $unidades,
-            'showNavbar' => $showNavbar
+            'showNavbar' => $showNavbar,
+            'alertas' => $alertas
         ]);
     }
 
@@ -35,7 +41,7 @@ class UnidadController {
             }
         }
 
-        $router->render('unidades/crear',[
+        $router->render('unidades/crear-unidad',[
             'unidad' => $unidad,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
@@ -58,7 +64,7 @@ class UnidadController {
 ;            }
         }
 
-        $router->render('unidades/actualizar', [
+        $router->render('unidades/actualizar-unidad', [
             'unidad' => $unidad,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
