@@ -6,14 +6,16 @@ use MVC\Router;
 class PrincipalController {
 
     public static function index(Router $router) {
-        session_start();
-        isAuth();
-        $showNavbar = true;
+        if(!is_auth()){
+            header('Location: /');
+        }
+
+        $mostrarLayout = true;
 
         $router->render('principal/index', [
+            'titulo' => 'Dashboard',
             'nombre' => $_SESSION['nombre'],
-            'showNavbar' => $showNavbar
-
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
 }

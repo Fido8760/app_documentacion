@@ -1,14 +1,10 @@
 
-<?php
-    $showNavbar = false;
-    ob_start();
-?>
 <br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-5">
         <?php  
-            include_once __DIR__ . "/../template/alertas.php";
+            include __DIR__ . "/../templates/alertas.php";
         ?>
         </div>
     

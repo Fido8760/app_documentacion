@@ -2,28 +2,35 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use MVC\Router;
+use Controllers\GPSController;
 use Controllers\CajaController;
 use Controllers\LoginController;
+use Controllers\AcusesController;
 use Controllers\PolizaController;
-use Controllers\PrincipalController;
 use Controllers\UnidadController;
-use MVC\Router;
+use Controllers\PrincipalController;
+use Controllers\OperadoresController;
+use Controllers\PuestoController;
+use Controllers\VerifFisicoController;
+use Controllers\VerifAmbientalController;
+use Controllers\TarjetaCirculacionController;
 
 $router = new Router();
 
 //Login
 $router->get('/', [LoginController::class, 'login']);
 $router->post('/', [LoginController::class, 'login']);
-$router->get('/logout', [LoginController::class, 'logout']);
+$router->post('/logout', [LoginController::class, 'logout']);
 
 //Area principal (index)
 $router->get('/principal', [PrincipalController::class,'index']);
 
 
 // CRUD Usuarios
-$router->get('/auth/usuarios',[LoginController::class, 'index']);
-$router->get('/auth/crear-usuario',[LoginController::class, 'crear']);
-$router->post('/auth/crear-usuario',[LoginController::class, 'crear']);
+$router->get('/usuarios',[LoginController::class, 'index']);
+$router->get('/usuarios/crear-usuario',[LoginController::class, 'crear']);
+$router->post('/usuarios/crear-usuario',[LoginController::class, 'crear']);
  
 // Recuperar password
 $router->get('/olvide', [LoginController::class, 'olvide']);
@@ -33,19 +40,13 @@ $router->post('/recuperar', [LoginController::class, 'recuperar']);
 
 //Crud Unidades
 $router->get('/unidades', [UnidadController::class, 'index']);
-// $router->get('/unidades/crear', [UnidadController::class, 'crear']);
-// $router->post('/unidades/crear', [UnidadController::class, 'crear']);
-// $router->get('/unidades/actualizar', [UnidadController::class, 'actualizar']);
-// $router->post('/unidades/actualizar', [UnidadController::class, 'actualizar']);
-// $router->post('/unidades/eliminar', [UnidadController::class, 'eliminar']);
-
-//Crud Unidades
-
-$router->get('/api/unidades', [UnidadController::class, 'index']);
-$router->post('/api/unidad', [UnidadController::class, 'crear']);
-$router->post('/api/unidad/actualizar', [UnidadController::class, 'crear']);
-$router->post('/api/unidad/eliminar', [UnidadController::class, 'actualizar']);
-
+$router->get('/unidades/crear', [UnidadController::class, 'crear']);
+$router->post('/unidades/crear', [UnidadController::class, 'crear']);
+$router->get('/unidades/actualizar', [UnidadController::class, 'actualizar']);
+$router->post('/unidades/actualizar', [UnidadController::class, 'actualizar']);
+$router->post('/unidades/eliminar', [UnidadController::class, 'eliminar']);
+//API para mostrar datos
+$router->get('/api/unidades/', [UnidadController::class, 'info']);
 
 //CRUD Cajas
 
@@ -69,5 +70,36 @@ $router->post('/polizas/crear', [PolizaController::class, 'crear']);
 $router->get('/polizas/actualizar', [PolizaController::class, 'actualizar']);
 $router->post('/polizas/actualizar', [PolizaController::class, 'actualizar']);
 $router->post('/polizas/eliminar', [PolizaController::class, 'eliminar']);
+
+//Verificaciones Ambientales
+
+$router->get('/verif-ambiental',[VerifAmbientalController::class, 'index']);
+
+//Verificiaciones Fisico mecanicas
+
+$router->get('/verif-fisico', [VerifFisicoController::class, 'index']);
+
+//Tarjetas de circulación
+
+$router->get('/tarjetas-circulacion', [TarjetaCirculacionController::class, 'index']);
+
+//Acuses
+
+$router->get('/acuses', [AcusesController::class, 'index']);
+
+//Gps
+
+$router->get('/gps', [GPSController::class, 'index']);
+
+//Operadores
+
+$router->get('/operadores', [OperadoresController::class, 'index']);
+
+//puestos
+
+$router->get('/puestos', [PuestoController::class, 'index']);
+
+
+
 
 $router->comprobarRutas();

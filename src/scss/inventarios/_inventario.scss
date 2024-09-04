@@ -1,0 +1,191 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.inventario {
+  @include m.contenedor;
+
+  &__format-container {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  &__courses-box {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 30px 0;
+  }
+
+  &__courses-item {
+    flex-basis: calc(25% - 30px); /* Cambio a 25% para 4 columnas */
+    margin: 0 15px 30px;
+    overflow: hidden;
+    border-radius: 28px;
+    box-shadow: 23px 28px 21px -7px rgba(0, 0, 0, 0.51);
+    
+    @media only screen and (max-width: 979px) {
+      flex-basis: calc(50% - 30px);
+    }
+
+    @media only screen and (max-width: 639px) {
+      flex-basis: 100%;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &-link {
+      &--unidades {
+        @include m.tarjeta(#121d81);
+      }
+      &--cajas {
+        @include m.tarjeta(#0d7259);
+      }
+    }
+
+    &-title {
+      min-height: 0rem;
+      margin-bottom: 0;
+      overflow: hidden;
+      font-weight: bold;
+      font-size: 30px;
+      color: #FFF;
+      z-index: 2;
+      position: relative;
+
+      @media only screen and (max-width: 979px) {
+        font-size: 24px;
+      }
+
+      @media only screen and (max-width: 639px) {
+        min-height: 2rem;
+        line-height: 1;
+        font-size: 24px;
+      }
+    }
+
+    &-description {
+      color: #fff;
+      list-style: none;
+      padding: 0;
+      z-index: 2;
+      position: relative;
+      
+      &-type, &-brand {
+        display: block;
+        color: #fff;
+      }
+    }
+
+    &-date-box {
+      font-size: 18px;
+      color: #FFF;
+      z-index: 2;
+      position: relative;
+
+      @media only screen and (max-width: 639px) {
+        font-size: 16px;
+      }
+    }
+
+    &-date {
+      font-weight: bold;
+      color: #f9b234;
+      transition: color .5s ease;
+    }
+
+    &-bg {
+      height: 128px;
+      width: 128px;
+      background-color: #a01010;
+      z-index: 1;
+      position: absolute;
+      top: -75px;
+      right: -75px;
+      border-radius: 50%;
+      transition: all .5s ease;
+    }
+
+    &:nth-child(2n) .inventario__courses-item-bg {
+      background-color: #3ecd5e;
+    }
+
+    &:nth-child(3n) .inventario__courses-item-bg {
+      background-color: #e44002;
+    }
+
+    &:nth-child(4n) .inventario__courses-item-bg {
+      background-color: #952aff;
+    }
+
+    &:nth-child(5n) .inventario__courses-item-bg {
+      background-color: #cd3e94;
+    }
+
+    &:nth-child(6n) .inventario__courses-item-bg {
+      background-color: #4c49ea;
+    }
+  }
+
+}
+
+.inventario__search-container {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#searchInput {
+    width: 80%;
+    padding: 1rem;
+    border: none;
+    border-radius: 3rem;
+}
+
+/* Estilo general para el paginador */
+.pagination {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas más pequeñas */
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Estilo para los enlaces de paginación */
+/* Estilo general para el paginador */
+.inventario__pagination {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas más pequeñas */
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Estilo para los enlaces de paginación */
+.inventario__pagination a {
+  color: black;
+  padding: 4px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  border-radius: 4px; /* Opcional: redondea los bordes de los enlaces */
+  font-size: 14px; /* Ajusta el tamaño del texto para mejor legibilidad */
+}
+
+/* Estilo para el enlace de paginación activo */
+.inventario__pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+/* Estilo para los enlaces de paginación cuando se pasa el ratón sobre ellos */
+.inventario__pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .inventario__pagination a {
+      padding: 6px 12px; /* Reduce el padding para pantallas más pequeñas */
+      font-size: 12px; /* Ajusta el tamaño del texto */
+  }
+}

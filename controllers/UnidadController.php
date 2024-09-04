@@ -6,32 +6,42 @@ use Model\Unidad;
 use MVC\Router;
 
 class UnidadController {
+
+    public static function info() {
+        $unidades = Unidad::all();
+        echo json_encode($unidades);
+    }
+
     public static function index(Router $router) {
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $alertas = [];
         $unidades = Unidad::all();
 
-        
-
         //echo json_encode(['unidades' => $unidades]);
-        $showNavbar = true;
+        $mostrarLayout = true;
         
-        $router->render('unidades/unidades', [
+        $router->render('unidades/index', [
+            'titulo' => 'Inventario de Unidades',
             'unidades' => $unidades,
-            'showNavbar' => $showNavbar,
+            'mostrarLayout' => $mostrarLayout,
             'alertas' => $alertas
         ]);
     }
 
     public static function crear(Router $router) {
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $showNavbar = true;
         $unidad = new Unidad;
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!is_auth()){
+                header('Location: /');
+            }
             $unidad->sincronizar($_POST);
             $alertas = $unidad->validar();
 
@@ -42,20 +52,25 @@ class UnidadController {
         }
 
         $router->render('unidades/crear-unidad',[
+            'titulo' => 'Agregar Unidad',
             'unidad' => $unidad,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
         ]);
     }
     public static function actualizar(Router $router) {
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $showNavbar = true;
         if(!is_numeric($_GET['id'])) return;
         $unidad = Unidad::find($_GET['id']);
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!is_auth()){
+                header('Location: /');
+            }
             $unidad->sincronizar($_POST);
             $alertas = $unidad->validar();
             if(empty($alertas)) {
@@ -65,6 +80,7 @@ class UnidadController {
         }
 
         $router->render('unidades/actualizar-unidad', [
+            'tiulo' => 'Actualizar Datos de la Unidad',
             'unidad' => $unidad,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
@@ -72,8 +88,9 @@ class UnidadController {
     }
 
     public static function eliminar() {
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
          if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = $_POST['id'];
             $unidad = Unidad::find($id);

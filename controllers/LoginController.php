@@ -9,7 +9,8 @@ class LoginController {
     public static function login(Router $router) {
         $alertas = [];
         $auth = new Usuario;
-        $showNavbar = false;
+        $mostrarLayout = false;
+
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auth = new Usuario($_POST);
@@ -32,16 +33,19 @@ class LoginController {
         }
         $alertas = Usuario::getAlertas();
 
-        $router->render('auth/login', [
+        $router->render('auth/login2', [
             'alertas' => $alertas,
             'auth' => $auth,
-            'showNavbar' => $showNavbar
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
     public static function logout() {
-        session_start();
-        $_SESSION = [];
-        header('Location: /');
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            session_start();
+            $_SESSION = [];
+            header('Location: /');
+        }
+       
     }
 
     public static function olvide(Router $router) {
@@ -74,7 +78,7 @@ class LoginController {
         }
         $alertas = Usuario::getAlertas();
 
-        $router->render('auth/olvide-password', [
+        $router->render('auth/olvide-password2', [
             'alertas' => $alertas
 
         ]);
@@ -110,31 +114,41 @@ class LoginController {
         }
 
         $alertas = Usuario::getAlertas();
-        $router->render('auth/recuperar-password', [
+        $router->render('auth/recuperar-password2', [
             'alertas' => $alertas,
             'error' => $error
         ]);
     }
+//----------------------------------------------------------------Administración y creación de usuarios-------------------------------------
 
     public static function index(Router $router) {
-        session_start();
-        isAuth();
-        $showNavbar = true;
+        if(!is_auth()){
+            header('Location: /');
+        }
+        $mostrarLayout = true;
         $usuarios = Usuario::all();
 
-        $router->render('/auth/usuarios', [
-            'usuarios' => $usuarios,
-            'showNavbar' => $showNavbar
+        $router->render('/usuarios/index', [
+            'titulo' => 'Usuarios Registrados',
+            'mostrarLayout' => $mostrarLayout,
+            'usuarios' => $usuarios
         ]);
     }
 
     public static function crear(Router $router) {
-        session_start();
-        isAuth();
-        $showNavbar = true;
+        if(!is_auth()){
+            header('Location: /');
+        }
+      
         $usuario = new Usuario;
         $alertas = [];
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if(!is_auth()){
+                header('Location: /');
+            }
+
             $usuario->sincronizar($_POST);
             $alertas = $usuario->validarCrear();
             if(empty($alertas)) {
@@ -146,15 +160,14 @@ class LoginController {
                     //si no esta registrado, hasheamos el pass
                     $usuario->hashPassword();
                     $resultado = $usuario->guardar();
-                    header('Location: /auth/usuarios');
+                    header('Location: /usuarios/index');
                 }
             }
         }
         
-        $router->render('auth/crear-usuario', [
+        $router->render('usuarios/crear-usuario', [
             'usuario' => $usuario,
-            'alertas' => $alertas, 
-            'showNavbar' => $showNavbar 
+            'alertas' => $alertas
         ]);
     }
 }

@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-5">
         <?php  
-            include_once __DIR__ . "/../template/alertas.php";
+            include_once __DIR__ . "/../templates/alertas.php";
         ?>
         </div>
     

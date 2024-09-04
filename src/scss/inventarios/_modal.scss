@@ -1,0 +1,112 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.modal {
+    position: fixed; /* Usar 'fixed' para que el modal cubra toda la pantalla */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Sintaxis correcta para el color de fondo */
+    display: flex; /* Centrar el contenido del modal */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegurar que el modal esté encima de otros elementos */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 100rem;
+    width: 90%;
+    transform: translateY(-60rem);
+    transition-property: all;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+    opacity: 0;
+
+    &__titulo {
+        text-align: center;
+    }
+    
+
+    &.animar {
+        position: relative;
+        top: 10%;
+        transform: translateY(-50%);
+        opacity: 1;
+    }
+    &.cerrar {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+
+    @include m.tablet {
+        
+    }
+}
+
+.tabla-unidad {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    table-layout: auto;
+}
+
+.tabla-unidad th, .tabla-unidad td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.4rem;
+ 
+}
+
+.tabla-unidad th {
+    background-color: #f4f4f4;
+}
+
+.cerrar-modal {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #471d1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) { /* Punto de quiebre para dispositivos móviles */
+    .tabla-unidad, .tabla-unidad thead, .tabla-unidad tbody, .tabla-unidad th, .tabla-unidad td, .tabla-unidad tr {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    .tabla-unidad thead tr {
+        display: none; /* Ocultar el encabezado de la tabla en pantallas pequeñas */
+    }
+
+    .tabla-unidad tr {
+        margin-bottom: 1rem; /* Espacio entre filas */
+    }
+
+    .tabla-unidad td {
+        font-size: 1.2rem;
+        text-align: right; /* Alinear el contenido a la derecha para que el pseudo-elemento quede a la izquierda */
+        padding-left: 50%;
+        position: relative;
+        border: none; /* Quitar los bordes */
+        border-bottom: 1px solid #ddd; /* Solo un borde inferior */
+    }
+
+    .tabla-unidad td::before { /* Contenido antes de cada celda */
+        content: attr(data-label); /* Usar el atributo data-label para los encabezados */
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 1rem;
+        font-weight: bold; /* Hacer que el encabezado en móviles sea negrita */
+        text-align: left; /* Alinear el encabezado a la izquierda */
+    }
+}

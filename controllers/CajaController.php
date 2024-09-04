@@ -7,27 +7,33 @@ use MVC\Router;
 
 class CajaController {
     public static function index(Router $router) {
-        session_start();
-        isAuth();
-        $showNavbar = true;
+        if(!is_auth()){
+            header('Location: /');
+        }
+        $mostrarLayout = true;
 
         $cajas = Caja::all();
 
-        $router->render('cajas/cajas', [
+        $router->render('cajas/index', [
+            'titulo' => 'Inventario de Remolques',
             'cajas' => $cajas,
-            'showNavbar' => $showNavbar
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
 
     public static function crear(Router $router) {
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $showNavbar = true;
 
         $caja = new Caja;
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if(!is_auth()){
+                header('Location: /');
+            }
             $caja->sincronizar($_POST);
             $alertas = $caja->validar();
 
@@ -38,6 +44,7 @@ class CajaController {
         }
 
         $router->render('cajas/crear-caja', [
+            'titulo' => 'Agrear Remolque',
             'caja' => $caja,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
@@ -45,8 +52,9 @@ class CajaController {
     }
 
     public static function actualizar(Router $router){
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $showNavbar = true;
 
         if(!is_numeric($_GET['id'])) return;
@@ -54,6 +62,9 @@ class CajaController {
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!is_auth()){
+                header('Location: /');
+            }
             $caja->sincronizar($_POST);
             $alertas = $caja->validar();
             if(empty($alertas)) {
@@ -64,6 +75,7 @@ class CajaController {
         }
 
         $router->render('cajas/actualizar', [
+            'titulo' => 'Actulizar datos de Remolque',
             'caja' => $caja,
             'alertas' => $alertas,
             'showNavbar' => $showNavbar
@@ -71,8 +83,9 @@ class CajaController {
 
     }
     public static function eliminar(){
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];

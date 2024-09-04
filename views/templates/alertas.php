@@ -1,16 +1,10 @@
-<br>
-<div class="container">
-<?php
-foreach($alertas as $tipo => $mensajes) {
-    foreach($mensajes as $mensaje) {
-        $alertClass = $tipo === 'exito' ? 'alert-success' : 'alert-danger';
+<?php 
+    foreach($alertas as $key=> $alerta) {
+        foreach ($alerta as $mensaje){
 ?>
-        <div class="alert <?php echo $alertClass; ?>" role="alert">
-            <?php echo $mensaje; ?>
-        </div>
+<div class="alerta alerta__<?php echo $key; ?>"> <?php echo $mensaje;?></div>
 <?php
-    }
-}
-?>
 
-</div>
+        }
+    }
+?>

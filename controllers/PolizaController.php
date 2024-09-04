@@ -7,9 +7,10 @@ use MVC\Router;
 
 class PolizaController {
     public static function index(Router $router) {
-        session_start();
-        isAuth();
-        $showNavbar = true;
+        if(!is_auth()){
+            header('Location: /');
+        }
+        $mostrarLayout = true;
         //Consultar bd
         $consulta = "SELECT polizas.id, CONCAT_WS('',unidades.no_unidad, cajas.numero_caja) AS economico, ";
         $consulta .= "n_poliza, ";
@@ -23,13 +24,15 @@ class PolizaController {
         $polizas = Poliza::SQL($consulta);
 
         $router->render('polizas/polizas', [
+            'titulo' => 'Pólizas de Seguro',
             'polizas' => $polizas,
-            'showNavbar' => $showNavbar
+            'mostrarLayout' => $mostrarLayout
 
         ]);
     }
     //Modal seleccion tipo de póliza
     public static function seleccionarTipoPoliza() {
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tipoPoliza = $_POST['tipo_poliza'];
             // Redirigir al formulario correspondiente
@@ -42,13 +45,17 @@ class PolizaController {
     }
 
     public static function crearPolizaVehicular(Router $router){
-        session_start();
-        isAuth();
+        if(!is_auth()){
+            header('Location: /');
+        }
         $showNavbar = true;
         $poliza = new Poliza;
         $alertas = [];
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if(!is_auth()){
+                header('Location: /');
+            }
             if (isset($_FILES['subir_archivo']) && $_FILES['subir_archivo']['error'] === UPLOAD_ERR_OK) {
                 $pdf = $_FILES['subir_archivo'];
                 
@@ -92,10 +99,16 @@ class PolizaController {
     }
     
     public static function actualizar(){
+        if(!is_auth()){
+            header('Location: /');
+        }
 
     }
 
     public static function eliminart(){
+        if(!is_auth()){
+            header('Location: /');
+        }
 
     }
 }

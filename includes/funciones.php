@@ -6,30 +6,37 @@ function debuguear($variable) : string {
     echo "</pre>";
     exit;
 }
-
-// Escapa / Sanitizar el HTML
 function s($html) : string {
     $s = htmlspecialchars($html);
     return $s;
 }
 
-function esUltimo(string $actual, string $proximo): bool {
-    if($actual !== $proximo) {
-        return true;
-    }
-    return false;
+function pagina_actual($path) : bool {
+    return str_contains($_SERVER['PATH_INFO'] ?? '/',$path) ? true : false;
 }
 
-//funcion que revisa que el usuario esté autenticado
-
-function isAuth() : void {
-    if(!isset($_SESSION['login'])) {
-        header('Location: /');
-    }
+function pagina_inicio($path) : bool {
+    // Verifica si la ruta está contenida en la URL actual
+    return str_contains($_SERVER['PATH_INFO'] ?? $_SERVER['REQUEST_URI'], $path);
 }
 
-function isAdmin(): void {
-    if(!isset($_SESSION['admin'])){
-        header('Location:/');
-    }
+
+function is_auth() : bool {
+    session_start();
+    return isset($_SESSION['nombre']) && !empty($_SESSION);
 }
+
+function is_admin() : bool {
+    session_start();
+    return isset($_SESSION['admin']) && !empty($_SESSION['admin']);
+}
+
+function aos_animacion() : void {
+    $efectos = ['fade-up','fade-down','fade-left','fade-right', 'flip-left', 'flip-right', 'zoom-in', 'zoom-in-up', 'zoom-in-down', 'zoom-out'];
+
+    $efecto = array_rand($efectos, 1);
+
+    echo 'data-aos="' . $efectos[$efecto] . '" ';
+
+}
+

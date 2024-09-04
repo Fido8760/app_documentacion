@@ -1,4 +1,4 @@
-<?php include_once __DIR__ . '/../templates/navbar.php' ?>
+
 <br>
 <main class="container">
     <h3>Usuarios</h3>

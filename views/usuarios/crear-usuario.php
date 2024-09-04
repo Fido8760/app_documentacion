@@ -1,7 +1,7 @@
-<?php include_once __DIR__ . '/../templates/navbar.php' ?>
+
 <br>
 <main class="container">
-<?php include_once __DIR__ . '/../template/alertas.php' ?>
+<?php include_once __DIR__ . '/../templates/alertas.php' ?>
     <div class="card">
         <form action="/auth/crear-usuario" method="post">
             <div class="card-header">
