@@ -1,0 +1,53 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedor{
+    @include m.contenedor-md;
+    padding: 2rem;
+}
+
+.formulario {
+    &__header{
+        &--btn-volver {
+            font-size: 1.8rem;
+        }
+    }
+
+    &__body{
+        &--titulo {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        &--alertas {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__campo{
+     
+            padding: 0;
+
+            &--label {
+                font-size: 2.5rem;
+                margin-left: 0;
+
+            }
+
+            &--input {
+                font-size: 1.5rem;
+                margin: 0;
+            }
+        }
+    }
+
+    &__footer {
+        &--btn-registrar{
+            font-size: 1.6rem;
+        }
+    }
+    
+}

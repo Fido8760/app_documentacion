@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".estatus").forEach((e=>{const t=e.textContent.trim();"Vigente"===t?e.classList.add("vigente"):"Por Vencer"===t?e.classList.add("por-vencer"):"Vencido"===t&&e.classList.add("vencido")}))}));

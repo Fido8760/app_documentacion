@@ -66,9 +66,7 @@ class LoginController {
                     $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
                     $email->enviarInstrucciones();
 
-                    
                     header("Refresh: 3; url=/");
-
 
                 } else {
                     Usuario::setAlerta('error', 'Si el correo existe en nuestra base de datos, recibirás un mensaje para restablecer tu contraseña');

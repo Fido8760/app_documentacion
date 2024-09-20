@@ -27,15 +27,16 @@
 
 @mixin boton($bgColor, $colorTexto) {
     background-color: $bgColor;
-    padding: 1.5rem 4rem;
+    padding: 1rem 3rem;
     color: $colorTexto;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     border: none;
+    border-radius: 2rem;
     transition-property: background-color;
     transition-duration: .3s;
     text-align: center;
-    width: 100%;
+    width: auto;
     display: inline-block;
 
     &:hover {

@@ -2,9 +2,9 @@
     let unidades = []; // Variable global para almacenar los datos de las unidades
 
     // Mostrar modal para info
-    const tarjetas = document.querySelectorAll('.mostrarModal');
-    tarjetas.forEach(tarjeta => {
-        tarjeta.addEventListener('click', mostrarModal);
+    const botonesModal = document.querySelectorAll('#mostrarModal');
+    botonesModal.forEach(boton => {
+        boton.addEventListener('click', mostrarModal);
     });
 
     async function obtenerDatos() {

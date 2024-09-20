@@ -26,16 +26,21 @@ class Poliza extends ActiveRecord {
     public $resp_civil;
     public $costo_poliza;
     public $subir_archivo;
+    public $unidad; 
+    public $caja;
     public $economico;
-    public $tipo;
     public $placas;
+    public $tipo;
+    public $estatus;
+    public $url_detalle;
+
 
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
         $this->t_poliza = $args['t_poliza'] ?? '';
-        $this->id_unidad = $args['id_unidad'] ?? null;
-        $this->id_caja = $args['id_caja'] ?? null;
+        $this->id_unidad = $args['id_unidad'] ?? '';
+        $this->id_caja = $args['id_caja'] ?? '';
         $this->beneficiario = $args['beneficiario'] ?? '';
         $this->fe_inicio = $args['fe_inicio'] ?? '';
         $this->fe_final = $args['fe_final'] ?? '';
@@ -49,9 +54,12 @@ class Poliza extends ActiveRecord {
         $this->resp_civil = $args['resp_civil'] ?? '';
         $this->costo_poliza = $args['costo_poliza'] ?? '';
         $this->subir_archivo = $args['subir_archivo'] ?? '';
+        $this->unidad = $args['unidad'] ?? '';
+        $this->caja = $args['caja'] ?? '';
         $this->economico = $args['economico'] ?? '';
+        $this->placas = $args['placas'] ?? '';
         $this->tipo = $args['tipo'] ?? '';
-        $this->placas = $args['economico'] ?? '';
+
 
     }
 
@@ -99,17 +107,11 @@ class Poliza extends ActiveRecord {
         if(!$this->costo_poliza) {
             self::$alertas['error'][] = 'Debe colocar el costo total de la póliza';
         }
+        if(!$this->subir_archivo) {
+            self::$alertas['error'][] = 'El archivo es obligatorio';
+        }
 
         return self::$alertas;
     }
 
-    //Subida de archivos 
-
-    public function setPDF($pdf) {
-        //asignar al atributo de pdf
-        if($pdf) {
-            $this->subir_archivo = $pdf;
-
-        }
-    } 
 }

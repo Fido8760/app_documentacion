@@ -2,113 +2,383 @@
 
 namespace Controllers;
 
-use Model\Poliza;
+use Model\Caja;
 use MVC\Router;
+use Model\Poliza;
+use Model\Unidad;
+use Model\PolizaCaja;
+use Model\PolizaUnidad;
 
-class PolizaController {
-    public static function index(Router $router) {
-        if(!is_auth()){
+class PolizaController
+{
+    public static function info()
+    {
+        $polizas = Poliza::all();
+        foreach ($polizas as $poliza) {
+
+            $poliza->unidad = Unidad::find($poliza->id_unidad);
+            $poliza->caja = Caja::find($poliza->id_caja);
+
+            $poliza->economico = $poliza->unidad->no_unidad ?? $poliza->caja->numero_caja ?? '';
+            $poliza->placas = $poliza->unidad->u_placas ?? $poliza->caja->c_placas ?? '';
+            $poliza->tipo = $poliza->unidad->tipo_unidad ?? $poliza->caja->capacidad ?? '';
+        }
+
+        echo json_encode($polizas);
+    }
+    public static function index(Router $router)
+    {
+        if (!is_auth()) {
             header('Location: /');
         }
+
+        $polizas = Poliza::all();
+        foreach ($polizas as $poliza) {
+            $poliza->unidad = Unidad::find($poliza->id_unidad);
+            $poliza->caja = Caja::find($poliza->id_caja);
+
+            $poliza->economico = $poliza->unidad->no_unidad ?? $poliza->caja->numero_caja ?? '';
+            $poliza->placas = $poliza->unidad->u_placas ?? $poliza->caja->c_placas ?? '';
+            $poliza->tipo = $poliza->unidad->tipo_unidad ?? $poliza->caja->capacidad ?? '';
+            $poliza->estatus = calcularEstatus($poliza->fe_final, $poliza->economico, $poliza->placas, $poliza->id); // Función para calcular el estatus
+
+            // Verificar si es una unidad o una caja
+            if ($poliza->unidad) {
+                $poliza->url_detalle = "/polizas/actualizar-poliza-unidad?id=" . $poliza->id;
+            } else if ($poliza->caja) {
+                $poliza->url_detalle = "/polizas/actualizar-poliza-remolque?id=" . $poliza->id;
+            }
+        }
+
         $mostrarLayout = true;
-        //Consultar bd
-        $consulta = "SELECT polizas.id, CONCAT_WS('',unidades.no_unidad, cajas.numero_caja) AS economico, ";
-        $consulta .= "n_poliza, ";
-        $consulta .= "CONCAT_WS('',tipo_unidad, cajas.capacidad) AS tipo, ";
-        $consulta .= "CONCAT_WS('',unidades.u_placas, cajas.c_placas) AS placas, ";
-        $consulta .= "fe_final, subir_archivo ";
-        $consulta .= "FROM polizas ";
-        $consulta .= "LEFT JOIN unidades ON polizas.id_unidad = unidades.id ";
-        $consulta .= "LEFT JOIN cajas ON polizas.id_caja = cajas.id";
-
-        $polizas = Poliza::SQL($consulta);
-
-        $router->render('polizas/polizas', [
+        $router->render('polizas/index', [
             'titulo' => 'Pólizas de Seguro',
-            'polizas' => $polizas,
-            'mostrarLayout' => $mostrarLayout
+            'mostrarLayout' => $mostrarLayout,
+            'polizas' => $polizas
+        ]);
+    }
+
+    
+    //--------------------------------------------- PÓLIZAS UNIDADES -----------------------------------------------------------------
+
+
+    public static function crearPolizaUnidad(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /');
+        }
+        $consulta = 'SELECT u.id, u.no_unidad FROM unidades u LEFT JOIN polizas p ON u.id = p.id_unidad WHERE p.id_unidad IS NULL;';
+        $alertas = [];
+        $mostrarLayout = true;
+        $unidades = Unidad::SQL($consulta);
+        $poliza_unidad = new PolizaUnidad;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!is_auth()) {
+                header('Location: /');
+            }
+            // Leer archivo PDF
+            if (!empty($_FILES['subir_archivo']['tmp_name'])) {
+
+                $carpetaPDF = '../public/build/pdf';
+
+                // Crear la carpeta si no existe
+                if (!is_dir($carpetaPDF)) {
+                    mkdir($carpetaPDF, 0755, true);
+                }
+
+                // Generar un nombre único para el archivo
+                $nombre_pdf = md5(uniqid(rand(), true));
+
+                // Obtener la extensión del archivo para conservarla
+                $extension = pathinfo($_FILES['subir_archivo']['name'], PATHINFO_EXTENSION);
+
+                // Asignar el nombre completo del archivo
+                $nombreArchivo = $nombre_pdf . '.' . $extension;
+
+                // Guardar el nuevo nombre del archivo en $_POST
+                $_POST['subir_archivo'] = $nombreArchivo;
+
+                // Mover el archivo a la carpeta
+                $pdf = $_FILES['subir_archivo']['tmp_name'];
+                $rutaDestino = $carpetaPDF . '/' . $nombreArchivo;
+
+                if (move_uploaded_file($pdf, $rutaDestino)) {
+                    // El archivo ha sido subido correctamente
+                }
+            }
+
+            // Sincronizar con el modelo y validar
+            $poliza_unidad->sincronizar($_POST);
+            $alertas = $poliza_unidad->validar();
+
+            if (empty($alertas)) {
+                $resultado = $poliza_unidad->guardar();
+
+                if ($resultado) {
+                    header('Location: /polizas');
+                }
+            }
+        }
+
+        $router->render('polizas/poliza-unidad', [
+            'titulo' => 'Póliza de Seguro Para Unidades',
+            'mostrarLayout' => $mostrarLayout,
+            'alertas' => $alertas,
+            'poliza_unidad' => $poliza_unidad,
+            'unidades' => $unidades,
+            'actualizando' => false
+        ]);
+    }
+
+    public static function actualizarPolizaUnidad(Router $router)
+    {
+        $mostrarLayout = true;
+        $alertas = [];
+        $id = $_GET['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        if (!$id) {
+            header('Location: /polizas');
+        }
+        $poliza_unidad = PolizaUnidad::find($id);
+        if (!$poliza_unidad) {
+            header('Location: /polizas');
+        }
+
+        // Guardamos el archivo actual (PDF) para su posible eliminación
+        $poliza_unidad->unidad = Unidad::find($poliza_unidad->id_unidad);
+
+        $poliza_unidad->pdf_actual = $poliza_unidad->subir_archivo;
+        $pdfAnterior = $poliza_unidad->pdf_actual; // Guardamos el nombre del archivo actual
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (!empty($_FILES['subir_archivo']['tmp_name'])) {
+                $carpetaPDF = '../public/build/pdf';
+
+                // Crear la carpeta si no existe
+                if (!is_dir($carpetaPDF)) {
+                    mkdir($carpetaPDF, 0755, true);
+                }
+
+                // Generar un nombre único para el archivo
+                $nombre_pdf = md5(uniqid(rand(), true));
+
+                // Obtener la extensión del archivo para conservarla
+                $extension = pathinfo($_FILES['subir_archivo']['name'], PATHINFO_EXTENSION);
+
+                // Asignar el nombre completo del archivo
+                $nombreArchivo = $nombre_pdf . '.' . $extension;
+
+                // Guardar el nuevo nombre del archivo en $_POST
+                $_POST['subir_archivo'] = $nombreArchivo;
+
+                // Eliminar el archivo anterior si existe
+                if (file_exists($carpetaPDF . '/' . $pdfAnterior)) {
+                    unlink($carpetaPDF . '/' . $pdfAnterior); // Eliminar el archivo anterior
+                }
+            } else {
+                // Mantener el archivo actual si no se sube uno nuevo
+                $_POST['subir_archivo'] = $poliza_unidad->pdf_actual;
+            }
+
+            // Sincronizar el modelo con los datos del formulario
+            $poliza_unidad->sincronizar($_POST);
+            $alertas = $poliza_unidad->validar();
+
+            if (empty($alertas)) {
+                if (isset($nombreArchivo)) {
+                    // Mover el archivo a la carpeta
+                    $pdf = $_FILES['subir_archivo']['tmp_name'];
+                    $rutaDestino = $carpetaPDF . '/' . $nombreArchivo;
+
+                    if (move_uploaded_file($pdf, $rutaDestino)) {
+                        // El archivo ha sido subido correctamente
+                    }
+                }
+                $resultado = $poliza_unidad->guardar();
+
+                if ($resultado) {
+                    header('Location:/polizas');
+                }
+            }
+        }
+
+        $router->render('polizas/actualizar-poliza-u', [
+            'titulo' => 'Actualización de Póliza de Unidad',
+            'mostrarLayout' =>  $mostrarLayout,
+            'alertas' => $alertas,
+            'poliza_unidad' => $poliza_unidad,
+            'actualizando' => true
+        ]);
+    }
+ 
+    //--------------------------------------- Polizas de Remolques ----------------------------
+
+    public static function crearPolizaRemolque(Router $router)
+    {
+
+        $mostrarLayout = true;
+        $alertas = [];
+        $poliza_caja = new PolizaCaja;
+        $consulta = 'SELECT c.id, c.numero_caja FROM cajas c LEFT JOIN polizas p ON c.id = p.id_caja WHERE p.id_caja IS NULL';
+        $cajas = Caja::SQL($consulta);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (!empty($_FILES['subir_archivo']['tmp_name'])) {
+
+                $carpetaPDF = '../public/build/pdf';
+
+                // Crear la carpeta si no existe
+                if (!is_dir($carpetaPDF)) {
+                    mkdir($carpetaPDF, 0755, true);
+                }
+                $nombre_pdf = md5(uniqid(rand(), true));
+
+                $extension = pathinfo($_FILES['subir_archivo']['name'], PATHINFO_EXTENSION);
+
+                $nombreArchivo = $nombre_pdf . '.' . $extension;
+                $_POST['subir_archivo'] = $nombreArchivo;
+
+                $pdf = $_FILES['subir_archivo']['tmp_name'];
+                $rutaDestino = $carpetaPDF . '/' . $nombreArchivo;
+
+                if (move_uploaded_file($pdf, $rutaDestino)) {
+                    // El archivo ha sido subido correctamente
+                }
+            }
+            $poliza_caja->sincronizar($_POST);
+            $alertas = $poliza_caja->validar();
+
+            if (empty($alertas)) {
+                $resultado = $poliza_caja->guardar();
+
+                if ($resultado) {
+                    header('Location: /polizas');
+                }
+            }
+        }
+
+        $router->render('polizas/poliza-caja', [
+            'mostrarLayout' => $mostrarLayout,
+            'titulo' => 'Póliza de Seguro Para Remolques',
+            'alertas' => $alertas,
+            'poliza_caja' => $poliza_caja,
+            'actualizando' => false,
+            'cajas' => $cajas
 
         ]);
     }
-    //Modal seleccion tipo de póliza
-    public static function seleccionarTipoPoliza() {
+    public static function actualizarPolizaRemolque(Router $router)
+    {
+        $mostrarLayout = true;
+        $id = $_GET['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+        $alertas = [];
+
+        if (!$id) {
+            header('Location: /polizas');
+        }
+        $poliza_caja = PolizaCaja::find($id);
+        if (!$poliza_caja) {
+            header('Location: /polizas');
+        }
+        $poliza_caja->caja = Caja::find($poliza_caja->id_caja);
+
+        $poliza_caja->pdf_actual = $poliza_caja->subir_archivo;
+        $pdfAnterior = $poliza_caja->pdf_actual;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $tipoPoliza = $_POST['tipo_poliza'];
-            // Redirigir al formulario correspondiente
-            if ($tipoPoliza === 'vehicular') {
-                header('Location: /polizas/crear-poliza-vehicular');
-            } else if ($tipoPoliza === 'remolque') {
-                header('Location: /crear-poliza-remolque');
+            if (!empty($_FILES['subir_archivo']['tmp_name'])) {
+                $carpetaPDF = '../public/build/pdf';
+
+                // Crear la carpeta si no existe
+                if (!is_dir($carpetaPDF)) {
+                    mkdir($carpetaPDF, 0755, true);
+                }
+
+                // Generar un nombre único para el archivo
+                $nombre_pdf = md5(uniqid(rand(), true));
+
+                // Obtener la extensión del archivo para conservarla
+                $extension = pathinfo($_FILES['subir_archivo']['name'], PATHINFO_EXTENSION);
+
+                // Asignar el nombre completo del archivo
+                $nombreArchivo = $nombre_pdf . '.' . $extension;
+
+                // Guardar el nuevo nombre del archivo en $_POST
+                $_POST['subir_archivo'] = $nombreArchivo;
+
+                // Eliminar el archivo anterior si existe
+                if (file_exists($carpetaPDF . '/' . $pdfAnterior)) {
+                    unlink($carpetaPDF . '/' . $pdfAnterior); // Eliminar el archivo anterior
+                }
+            } else {
+                // Mantener el archivo actual si no se sube uno nuevo
+                $_POST['subir_archivo'] = $poliza_unidad->pdf_actual;
+            }
+
+            // Sincronizar el modelo con los datos del formulario
+            $poliza_caja->sincronizar($_POST);
+            $alertas = $poliza_caja->validar();
+
+            if (empty($alertas)) {
+                if (isset($nombreArchivo)) {
+                    // Mover el archivo a la carpeta
+                    $pdf = $_FILES['subir_archivo']['tmp_name'];
+                    $rutaDestino = $carpetaPDF . '/' . $nombreArchivo;
+
+                    if (move_uploaded_file($pdf, $rutaDestino)) {
+                        // El archivo ha sido subido correctamente
+                    }
+                }
+                $resultado = $poliza_caja->guardar();
+
+                if ($resultado) {
+                    header('Location:/polizas');
+                }
             }
         }
+
+        $router->render('polizas/actualizar-poliza-r', [
+            'mostrarLayout' => $mostrarLayout,
+            'titulo' => 'Actualizar Póliza de Remolque',
+            'poliza_caja' => $poliza_caja,
+            'actualizando' => true,
+            'alertas' => $alertas
+        ]);
     }
 
-    public static function crearPolizaVehicular(Router $router){
-        if(!is_auth()){
+    //--------------------------------------------- ELIMINAR PÓLIZAS -----------------------------------------------------------------
+    public static function eliminar() {
+        if (!is_auth()) {
             header('Location: /');
         }
-        $showNavbar = true;
-        $poliza = new Poliza;
-        $alertas = [];
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if(!is_auth()){
-                header('Location: /');
-            }
-            if (isset($_FILES['subir_archivo']) && $_FILES['subir_archivo']['error'] === UPLOAD_ERR_OK) {
-                $pdf = $_FILES['subir_archivo'];
-                
-                // Procesa el archivo
-                $carpetaPDF = '../public/build/pdf/';
-                if (!is_dir($carpetaPDF)) {
-                    mkdir($carpetaPDF);
-                }
-                $nombrePDF = md5(uniqid(rand(), true));
-                move_uploaded_file($pdf['tmp_name'], $carpetaPDF . $nombrePDF . ".pdf");
-                $poliza->setPDF($nombrePDF);
-            } else {
-                // Manejo de errores si el archivo no se ha subido correctamente
-                $alertas['error'][] = 'No se ha subido ningún archivo o hubo un error en la carga.';
-            }
-            
-            $poliza->sincronizar($_POST);
-            $alertas = $poliza->validar();
 
-            if(empty($alertas)){
-                $poliza->guardar();
-                $carpetaPDF = '../public/build/pdf/';
-                if(!is_dir($carpetaPDF)){
-                    mkdir($carpetaPDF);
-                }
-                //generamos nombre único
-                $nombrePDF = md5( uniqid( rand(), true) );
-                //subir pdf
-                move_uploaded_file($pdf['tmp_name'], $carpetaPDF . $nombrePDF . ".pdf");
-                $poliza->setPDF($nombrePDF);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $poliza = Poliza::find($id);
+
+            if (!$poliza) {
+                header('Location: /polizas');
+            }
+
+            // Obtener el archivo PDF asociado
+            $pdfArchivo = $poliza->subir_archivo;
+            $carpetaPDF = '../public/build/pdf';
+
+            // Eliminar el archivo PDF del servidor si existe
+            if (!empty($pdfArchivo) && file_exists($carpetaPDF . '/' . $pdfArchivo)) {
+                unlink($carpetaPDF . '/' . $pdfArchivo); // Eliminar el archivo del servidor
+            }
+
+            // Eliminar la póliza de la base de datos
+            $resultado = $poliza->eliminar();
+            if ($resultado) {
                 header('Location: /polizas');
             }
         }
-
-        $router->render('polizas/crear-poliza-vehicular', [
-            'showNavbar' => $showNavbar,
-            'poliza' => $poliza,
-            'alertas' => $alertas
-        ]); 
-
-    }
-    
-    public static function actualizar(){
-        if(!is_auth()){
-            header('Location: /');
-        }
-
-    }
-
-    public static function eliminart(){
-        if(!is_auth()){
-            header('Location: /');
-        }
-
     }
 }

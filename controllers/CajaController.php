@@ -6,6 +6,13 @@ use Model\Caja;
 use MVC\Router;
 
 class CajaController {
+
+    public static function info() {
+        $cajas = Caja::all();
+        echo json_encode($cajas);
+    }
+
+
     public static function index(Router $router) {
         if(!is_auth()){
             header('Location: /');
@@ -25,7 +32,7 @@ class CajaController {
         if(!is_auth()){
             header('Location: /');
         }
-        $showNavbar = true;
+        $mostrarLayout = true;
 
         $caja = new Caja;
         $alertas = [];
@@ -47,7 +54,7 @@ class CajaController {
             'titulo' => 'Agrear Remolque',
             'caja' => $caja,
             'alertas' => $alertas,
-            'showNavbar' => $showNavbar
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
 
@@ -55,7 +62,7 @@ class CajaController {
         if(!is_auth()){
             header('Location: /');
         }
-        $showNavbar = true;
+        $mostrarLayout = true;
 
         if(!is_numeric($_GET['id'])) return;
         $caja = Caja::find($_GET['id']);
@@ -74,11 +81,11 @@ class CajaController {
 
         }
 
-        $router->render('cajas/actualizar', [
+        $router->render('cajas/actualizar-caja', [
             'titulo' => 'Actulizar datos de Remolque',
             'caja' => $caja,
             'alertas' => $alertas,
-            'showNavbar' => $showNavbar
+            'mostrarLayout' => $mostrarLayout
         ]);
 
     }

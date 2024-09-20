@@ -56,20 +56,27 @@ $router->post('/cajas/crear', [CajaController::class, 'crear']);
 $router->get('/cajas/actualizar', [CajaController::class, 'actualizar']);
 $router->post('/cajas/actualizar', [CajaController::class, 'actualizar']);
 $router->post('/cajas/eliminar', [CajaController::class, 'eliminar']);
+//API para mostrar datos completos de caja
+$router->get('/api/cajas/', [CajaController::class, 'info']);
 
-//CRUD Pólizas
-
+//-------------------CRUD Pólizas------------------------------
+//unidades
 $router->get('/polizas', [PolizaController::class, 'index']);
-$router->post('/polizas/seleccionar-tipo-poliza', [PolizaController::class, 'seleccionarTipoPoliza']);
-$router->get('/polizas/crear-poliza-vehicular', [PolizaController::class, 'crearPolizaVehicular']);
-$router->post('/polizas/crear-poliza-vehicular', [PolizaController::class, 'crearPolizaVehicular']);
-$router->get('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearPolizaRemolque']);
-
-$router->get('/polizas/crear', [PolizaController::class, 'crear']);
-$router->post('/polizas/crear', [PolizaController::class, 'crear']);
-$router->get('/polizas/actualizar', [PolizaController::class, 'actualizar']);
-$router->post('/polizas/actualizar', [PolizaController::class, 'actualizar']);
+$router->get('/polizas/crear-poliza-unidad', [PolizaController::class, 'crearPolizaUnidad']);
+$router->post('/polizas/crear-poliza-unidad', [PolizaController::class, 'crearPolizaUnidad']);
+$router->get('/polizas/actualizar-poliza-unidad', [PolizaController::class, 'actualizarPolizaUnidad']);
+$router->post('/polizas/actualizar-poliza-unidad', [PolizaController::class, 'actualizarPolizaUnidad']);
 $router->post('/polizas/eliminar', [PolizaController::class, 'eliminar']);
+
+//remolques
+$router->get('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearPolizaRemolque']);
+$router->post('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearPolizaRemolque']);
+$router->get('/polizas/actualizar-poliza-remolque', [PolizaController::class, 'actualizarPolizaRemolque']);
+$router->post('/polizas/actualizar-poliza-remolque', [PolizaController::class, 'actualizarPolizaRemolque']);
+
+
+//API Polizas
+$router->get('/api/polizas/', [PolizaController::class, 'info']);
 
 //Verificaciones Ambientales
 

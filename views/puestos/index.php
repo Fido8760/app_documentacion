@@ -1,1 +1,1 @@
-<h2><?php echo $titulo; ?></h2>
+<h2 class="titulo_principal"><?php echo $titulo; ?></h2>

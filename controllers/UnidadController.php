@@ -6,7 +6,6 @@ use Model\Unidad;
 use MVC\Router;
 
 class UnidadController {
-
     public static function info() {
         $unidades = Unidad::all();
         echo json_encode($unidades);
@@ -16,7 +15,6 @@ class UnidadController {
         if(!is_auth()){
             header('Location: /');
         }
-        $alertas = [];
         $unidades = Unidad::all();
 
         //echo json_encode(['unidades' => $unidades]);
@@ -25,8 +23,7 @@ class UnidadController {
         $router->render('unidades/index', [
             'titulo' => 'Inventario de Unidades',
             'unidades' => $unidades,
-            'mostrarLayout' => $mostrarLayout,
-            'alertas' => $alertas
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
 
@@ -34,68 +31,98 @@ class UnidadController {
         if(!is_auth()){
             header('Location: /');
         }
-        $showNavbar = true;
-        $unidad = new Unidad;
+        $mostrarLayout = true;
         $alertas = [];
+        $unidad = new Unidad;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(!is_auth()){
                 header('Location: /');
             }
+
             $unidad->sincronizar($_POST);
+
+            //validar
             $alertas = $unidad->validar();
 
             if(empty($alertas)) {
-                $unidad->guardar();
-                header('Location: /unidades');
+                $resultado = $unidad->guardar();
+
+                if($resultado) {
+                    header('Location: /unidades');
+                }
             }
         }
-
-        $router->render('unidades/crear-unidad',[
-            'titulo' => 'Agregar Unidad',
-            'unidad' => $unidad,
+        
+        $router->render('unidades/crear-unidad', [
+            'titulo' => 'Registrar Unidades',
+            'mostrarLayout' => $mostrarLayout,
             'alertas' => $alertas,
-            'showNavbar' => $showNavbar
+            'unidad' => $unidad
         ]);
     }
+
     public static function actualizar(Router $router) {
         if(!is_auth()){
             header('Location: /');
         }
-        $showNavbar = true;
-        if(!is_numeric($_GET['id'])) return;
-        $unidad = Unidad::find($_GET['id']);
+        $mostrarLayout = true;
         $alertas = [];
 
+        //validar id
+        $id = $_GET['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        if(!$id) {
+            header('Location: /unidades');
+        }
+        //unidad a editar
+
+        $unidad = Unidad::find($id);
+
+        if(!$unidad) {
+            header('Location:/unidades');
+        }
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(!is_auth()){
                 header('Location: /');
             }
+
             $unidad->sincronizar($_POST);
             $alertas = $unidad->validar();
+
             if(empty($alertas)) {
-                $unidad->guardar();
-                header('Location: /unidades')
-;            }
+                $resultado = $unidad->guardar();
+                if($resultado) {
+                    header('Location: /unidades');
+                }
+            }
         }
 
         $router->render('unidades/actualizar-unidad', [
-            'tiulo' => 'Actualizar Datos de la Unidad',
-            'unidad' => $unidad,
+            'titulo' => 'Actualizar Datos de la Unidad',
             'alertas' => $alertas,
-            'showNavbar' => $showNavbar
+            'unidad' => $unidad,
+            'mostrarLayout' => $mostrarLayout
         ]);
     }
-
     public static function eliminar() {
-        if(!is_auth()){
-            header('Location: /');
-        }
-         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!is_auth()){
+                header('Location: /');
+            }
             $id = $_POST['id'];
             $unidad = Unidad::find($id);
-            $unidad->eliminar();
-            header('Location: /unidades');
+
+            if(!isset($unidad)) {
+                header('Location: /unidades');
+            }
+
+            $resultado = $unidad->eliminar();
+
+            if($resultado) {
+                header('Location: /unidades');
+            }
         }
     }
 }

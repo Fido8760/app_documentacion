@@ -1,44 +1,56 @@
-<h2><?php echo $titulo; ?></h2>
+<h2 class="titulo_principal"><?php echo $titulo; ?></h2>
 
-<br>
-<main class="inventario">
-    <div class="inventario__format-container">
-        <div class="inventario__search-container">
-            <input type="text" id="searchInput" class="inventario__search-input" placeholder="Buscar...">
-        </div>
-        <div class="inventario__courses-box">
-            <?php foreach ($unidades as $unidad): ?>
-                <div class="inventario__courses-item mostrarModal" data-id="<?php echo $unidad->id; ?>">
-                    <div class="inventario__courses-item-link--unidades">
-                        <div class="inventario__courses-item-bg"></div>
-
-                        <div class="inventario__courses-item-title">
-                            <?php echo $unidad->no_unidad; ?>
-                        </div>
-                        <ul class="inventario__courses-item-description">
-                            <li class="inventario__courses-item-type"><?php echo $unidad->tipo_unidad; ?></li>
-                            <li class="inventario__courses-item-brand"><?php echo $unidad->u_marca; ?></li>
-                        </ul>
-                        <div class="inventario__courses-item-date-box">
-                            Placa:
-                            <span class="inventario__courses-item-date">
-                                <?php echo $unidad->u_placas; ?>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <div id="pagination" class="inventario__pagination"></div>
+<div class="card sombreado">
+    <div class="card-header">
+        <a href="/unidades/crear" class="btn btn-primary btn-lg">Agregar Unidad</a>
     </div>
-</main>
+    <div class="card-body">
+        <div class="table-responsive tabla">
+            <table class="table align-middle table-hover" id="tabla_id">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Número Unidad</th>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Tipo unidad</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                <?php foreach($unidades as $unidad){?>
+                    <tr class="">
+                        <td scope="row"><?php echo $unidad->id;?></td>
+                        <td class="eco"> <button class="boton-eco" id="mostrarModal" data-id="<?php echo $unidad->id;?>"><?php echo $unidad->no_unidad; ?></button>  </td>
+                        <td><?php echo $unidad->u_placas;?></td>
+                        <td><?php echo $unidad->tipo_unidad;?></td>
+                        <td><?php echo $unidad->u_marca;?></td>
+                        <td>
+                            <form action="/unidades/eliminar" method="POST">
+                            <a class="btn btn-lg btn-info" href="/unidades/actualizar?id=<?php echo $unidad->id; ?>" role="button">Editar</a>
+                            |
+                                <input type="hidden" name="id" value="<?php echo $unidad->id; ?>">
+                                <button type="submit" class="btn btn-lg btn-danger" href="" role="button">Eliminar</button>
+                            </form>
+                           
+                        </td>
+                    </tr>
+                <?php } ?>
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+    <button class="btn btn-success btn-lg" onclick="exportarExcel()">Exportar a Excel</button>
+    </div>
+</div>
 
 
 <?php
 $script = "
-    <script src='build/js/app.js'></script>
-    <script src='build/js/modal.js'></script>
+    <script src='build/js/modal-unidad.js'></script>
+    <script src='build/js/datatable.js'></script>
     "
 ?>

@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){document.querySelector("#bontonExportar").addEventListener("click",(async function(){try{const t="/api/polizas/",e=await fetch(t),o=await e.json(),n=XLSX.utils.book_new(),i=XLSX.utils.json_to_sheet(o);XLSX.utils.book_append_sheet(n,i,"Pólizas"),XLSX.writeFile(n,"polizas.xlsx")}catch(t){console.log(t)}}))}));

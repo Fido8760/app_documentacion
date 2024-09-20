@@ -111,10 +111,15 @@ class ActiveRecord {
 
     // Busca un registro por su id
     public static function find($id) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE id = {$id}";
+        if(!$id) {
+            return null; // Si el id es nulo o vacío, retorna null o maneja el error
+        }
+    
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($id);
         $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
+        return array_shift($resultado);
     }
+    
     // Busca un registro por su id
     public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE {$columna} = '{$valor}'";

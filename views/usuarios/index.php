@@ -1,7 +1,6 @@
+<h2 class="titulo_principal"><?php echo $titulo; ?></h2>
 
-<br>
 <main class="container">
-    <h3>Usuarios</h3>
     <div class="card">
         <div class="card-header">
             <a href="/auth/crear-usuario" class="btn btn-primary">Agregar Usuario</a>
