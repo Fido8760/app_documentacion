@@ -38,3 +38,36 @@
 .tabla {
   font-size: 1.5rem;
 }
+
+
+.tabla-body {
+  align-items: center;
+  text-align: center;
+
+}
+
+.verif_folio-actual {
+  background-color: #199c19;
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  color: #dfe9df;
+  
+}
+.verif_folio-anterior {
+    background-color: #b31010;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+    color: #dfe9df;
+}
+.verif_fecha-actual {
+  background-color: #199c19;
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  color: #dfe9df;
+}
+.verif_fecha-anterior {
+  background-color: #b31010;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+    color: #dfe9df;
+}

@@ -46,7 +46,7 @@ class CajaController {
 
             if(empty($alertas)) {
                 $caja->guardar();
-                header('Location:/cajas');
+                header('Location:/cajas?alert=success&action=create');
             }
         }
 
@@ -76,7 +76,7 @@ class CajaController {
             $alertas = $caja->validar();
             if(empty($alertas)) {
                 $caja->guardar();
-                header('Location: /cajas');
+                header('Location: ?alert=success&action=update');
             }
 
         }
@@ -98,7 +98,7 @@ class CajaController {
             $id = $_POST['id'];
             $caja = Caja::find($id);
             $caja->eliminar();
-            header('Location: /cajas');
+            header('Location: /cajas?alert=success&action=delete');
         }
     }
 }

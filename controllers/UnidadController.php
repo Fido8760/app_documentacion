@@ -49,7 +49,7 @@ class UnidadController {
                 $resultado = $unidad->guardar();
 
                 if($resultado) {
-                    header('Location: /unidades');
+                    header('Location: /unidades?alert=success&action=create');
                 }
             }
         }
@@ -94,7 +94,7 @@ class UnidadController {
             if(empty($alertas)) {
                 $resultado = $unidad->guardar();
                 if($resultado) {
-                    header('Location: /unidades');
+                    header('Location: /unidades?alert=success&action=update');
                 }
             }
         }
@@ -121,7 +121,7 @@ class UnidadController {
             $resultado = $unidad->eliminar();
 
             if($resultado) {
-                header('Location: /unidades');
+                header('Location: /unidades?alert=success&action=delete');
             }
         }
     }

@@ -77,10 +77,11 @@ class PolizaController
             if (!is_auth()) {
                 header('Location: /');
             }
-            // Leer archivo PDF
-            if (!empty($_FILES['subir_archivo']['tmp_name'])) {
 
-                $carpetaPDF = '../public/build/pdf';
+             // Leer archivo PDF
+             if (!empty($_FILES['subir_archivo']['tmp_name'])) {
+
+                $carpetaPDF = '../public/build/pdf/polizas';
 
                 // Crear la carpeta si no existe
                 if (!is_dir($carpetaPDF)) {
@@ -113,10 +114,11 @@ class PolizaController
             $alertas = $poliza_unidad->validar();
 
             if (empty($alertas)) {
+
                 $resultado = $poliza_unidad->guardar();
 
                 if ($resultado) {
-                    header('Location: /polizas');
+                    header('Location: /polizas?alert=success&action=create');
                 }
             }
         }
@@ -146,8 +148,8 @@ class PolizaController
             header('Location: /polizas');
         }
 
-        // Guardamos el archivo actual (PDF) para su posible eliminación
         $poliza_unidad->unidad = Unidad::find($poliza_unidad->id_unidad);
+        // Guardamos el archivo actual (PDF) para su posible eliminación
 
         $poliza_unidad->pdf_actual = $poliza_unidad->subir_archivo;
         $pdfAnterior = $poliza_unidad->pdf_actual; // Guardamos el nombre del archivo actual
@@ -155,7 +157,7 @@ class PolizaController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (!empty($_FILES['subir_archivo']['tmp_name'])) {
-                $carpetaPDF = '../public/build/pdf';
+                $carpetaPDF = '../public/build/pdf/polizas';
 
                 // Crear la carpeta si no existe
                 if (!is_dir($carpetaPDF)) {
@@ -200,7 +202,7 @@ class PolizaController
                 $resultado = $poliza_unidad->guardar();
 
                 if ($resultado) {
-                    header('Location:/polizas');
+                    header('Location:/polizas?alert=success&action=update');
                 }
             }
         }
@@ -229,7 +231,7 @@ class PolizaController
 
             if (!empty($_FILES['subir_archivo']['tmp_name'])) {
 
-                $carpetaPDF = '../public/build/pdf';
+                $carpetaPDF = '../public/build/pdf/polizas';
 
                 // Crear la carpeta si no existe
                 if (!is_dir($carpetaPDF)) {
@@ -256,7 +258,7 @@ class PolizaController
                 $resultado = $poliza_caja->guardar();
 
                 if ($resultado) {
-                    header('Location: /polizas');
+                    header('Location: /?alert=success&action=create');
                 }
             }
         }
@@ -292,7 +294,7 @@ class PolizaController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['subir_archivo']['tmp_name'])) {
-                $carpetaPDF = '../public/build/pdf';
+                $carpetaPDF = '../public/build/pdf/polizas';
 
                 // Crear la carpeta si no existe
                 if (!is_dir($carpetaPDF)) {
@@ -337,7 +339,7 @@ class PolizaController
                 $resultado = $poliza_caja->guardar();
 
                 if ($resultado) {
-                    header('Location:/polizas');
+                    header('Location:/polizas?alert=success&action=update');
                 }
             }
         }
@@ -367,7 +369,7 @@ class PolizaController
 
             // Obtener el archivo PDF asociado
             $pdfArchivo = $poliza->subir_archivo;
-            $carpetaPDF = '../public/build/pdf';
+            $carpetaPDF = '../public/build/pdf/polizas';
 
             // Eliminar el archivo PDF del servidor si existe
             if (!empty($pdfArchivo) && file_exists($carpetaPDF . '/' . $pdfArchivo)) {
@@ -377,7 +379,7 @@ class PolizaController
             // Eliminar la póliza de la base de datos
             $resultado = $poliza->eliminar();
             if ($resultado) {
-                header('Location: /polizas');
+                header('Location: /polizas?alert=success&action=delete');
             }
         }
     }

@@ -31,7 +31,7 @@
                             <a class="btn btn-lg btn-info" href="/unidades/actualizar?id=<?php echo $unidad->id; ?>" role="button">Editar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $unidad->id; ?>">
-                                <button type="submit" class="btn btn-lg btn-danger" href="" role="button">Eliminar</button>
+                                <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
                            
                         </td>
@@ -50,6 +50,8 @@
 
 <?php
 $script = "
+    
+    <script src='build/js/alertas.js'></script>
     <script src='build/js/modal-unidad.js'></script>
     <script src='build/js/datatable.js'></script>
     "

@@ -73,14 +73,17 @@ $router->get('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearP
 $router->post('/polizas/crear-poliza-remolque', [PolizaController::class, 'crearPolizaRemolque']);
 $router->get('/polizas/actualizar-poliza-remolque', [PolizaController::class, 'actualizarPolizaRemolque']);
 $router->post('/polizas/actualizar-poliza-remolque', [PolizaController::class, 'actualizarPolizaRemolque']);
-
-
 //API Polizas
 $router->get('/api/polizas/', [PolizaController::class, 'info']);
 
 //Verificaciones Ambientales
 
 $router->get('/verif-ambiental',[VerifAmbientalController::class, 'index']);
+$router->get('/verif-ambiental/crear',[VerifAmbientalController::class, 'crear']);
+$router->post('/verif-ambiental/crear',[VerifAmbientalController::class, 'crear']);
+$router->get('/verif-ambiental/actualizar',[VerifAmbientalController::class, 'actualizar']);
+$router->post('/verif-ambiental/actualizar',[VerifAmbientalController::class, 'actualizar']);
+$router->post('/verif-ambiental/eliminar',[VerifAmbientalController::class, 'eliminar']);
 
 //Verificiaciones Fisico mecanicas
 

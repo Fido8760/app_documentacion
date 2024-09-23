@@ -31,7 +31,7 @@
                             <a class="btn btn-lg btn-info" href="/cajas/actualizar?id=<?php echo $caja->id; ?>" role="button">Editar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $caja->id; ?>">
-                                <button type="submit" class="btn btn-lg btn-danger" role="button">Eliminar</button>
+                                <button type="submit" class="btn btn-lg btn-danger btn-eliminar" role="button">Eliminar</button>
                             </form>
                            
                         </td>
@@ -50,6 +50,7 @@
 
 <?php
 $script = "
+    <script src='build/js/alertas.js'></script>
     <script src='build/js/datatable.js'></script>
     <script src='build/js/modal-caja.js'></script>
     "

@@ -29,13 +29,13 @@
                         <td><?php echo $poliza->placas;?></td>
                         <td><?php echo $poliza->fe_final;?></td>
                         <td><span class="estatus"><?php echo $poliza->estatus;?></span></td>
-                        <td><a href="/polizas/<?php echo $poliza->subir_archivo;?>"><?php echo $poliza->subir_archivo;?></a></td>
+                        <td><button type="button" class="btn btn-lg btn-outline-secondary">PDF</button></td>
                         <td>
                             <form action="/polizas/eliminar" method="POST">
                                 <a class="btn btn-lg btn-info" href="<?php echo $poliza->url_detalle; ?>" role="button">Actualizar</a>
                                 |
                                 <input type="hidden" name="id" value="<?php echo $poliza->id; ?>">
-                                <button type="submit" class="btn btn-lg btn-danger" href="" role="button">Eliminar</button>
+                                <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
                            
                         </td>
@@ -54,6 +54,7 @@
 
 <?php
 $script = "
+    <script src='build/js/alertas.js'></script>
     <script src='build/js/modal-polizas.js'></script>
     <script src='build/js/modal-seleccion.js'></script>
     <script src='build/js/vencimiento.js'></script>
