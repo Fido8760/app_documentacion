@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Classes\Email;
+use Model\Roles;
 use MVC\Router;
 use Model\Usuario;
 
@@ -24,6 +25,7 @@ class LoginController {
                     $_SESSION['id'] = $usuario->id;
                     $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;; 
                     $_SESSION['email'] = $usuario->email;
+                    $_SESSION['rol'] = $usuario->id_rol;
                     $_SESSION['login'] = true;
                     header('Location: /principal');
                 } else {
@@ -125,6 +127,11 @@ class LoginController {
         }
         $mostrarLayout = true;
         $usuarios = Usuario::all();
+        foreach($usuarios as $usuario) {
+            $usuario->roles = Roles::find($usuario->id_rol);
+        }
+
+
 
         $router->render('/usuarios/index', [
             'titulo' => 'Usuarios Registrados',
@@ -137,9 +144,11 @@ class LoginController {
         if(!is_auth()){
             header('Location: /');
         }
-      
+        $mostrarLayout = true;
         $usuario = new Usuario;
         $alertas = [];
+        $consulta = 'SELECT * FROM roles';
+        $roles = Roles::SQL($consulta);
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -158,14 +167,40 @@ class LoginController {
                     //si no esta registrado, hasheamos el pass
                     $usuario->hashPassword();
                     $resultado = $usuario->guardar();
-                    header('Location: /usuarios/index');
+                    header('Location: /usuarios?alert=success&action=create');
                 }
             }
         }
         
         $router->render('usuarios/crear-usuario', [
+            'mostrarLayout' => $mostrarLayout,
+            'titulo' => 'Agregar Usuario',
             'usuario' => $usuario,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'roles' => $roles,
+            'actualizando' => false
         ]);
     }
+
+    public static function eliminar() {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(!is_auth()){
+                header('Location: /');
+            }
+
+            $id = $_POST['id'];
+            $usuario = Usuario::find($id);
+
+            if(!isset($usuario)) {
+                header('Location: /usuarios');
+            }
+
+            $resultado = $usuario->eliminar();
+            if($resultado) {
+                header('Location: /usuarios?alert=success&action=delete');
+
+            }
+        }
+    }
+
 }

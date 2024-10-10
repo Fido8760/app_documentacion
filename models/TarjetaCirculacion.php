@@ -13,6 +13,12 @@ class TarjetaCirculacion extends ActiveRecord {
     public $subir_archivo_circulacion;
     public $id_unidad;
     public $id_caja;
+    public $caja;
+    public $unidad;
+    public $economico;
+    public $placas;
+    public $url_detalle;
+    public $pdf_actual;
 
     public function __construct($args = [])
     {
@@ -21,7 +27,7 @@ class TarjetaCirculacion extends ActiveRecord {
         $this->permiso_sct = $args['permiso_sct'] ?? '';
         $this->subir_archivo_circulacion = $args['subir_archivo_circulacion'] ?? '';
         $this->id_unidad = $args['id_unidad'] ?? '';
-        $this->folio_tarjeta = $args['folio_tarjeta'] ?? '';
+        $this->id_caja = $args['id_caja'] ?? '';
     }
 
 }

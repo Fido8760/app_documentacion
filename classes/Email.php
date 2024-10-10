@@ -105,5 +105,63 @@ class Email {
         $mail->Body = $contenido;
         $mail->send();
     }
+
+    //---------------------------------- Notificacion Licencia --------------------------------------------
+
+    public function notificacionEmailLicenciaPorVencer($vigencia, $nombre) {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '708da5b85c715f';
+        $mail->Password = '809715d4523f4a';
+        
+        $mail->setFrom('notificaciones@mudanzasamado.mx');
+        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->Subject = 'Licencia Por Vencer';
+
+        //Set HTML
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $contenido = "<html>";
+        $contenido .= "<p>Está por vencerse la licencia del Operador <strong>" . $nombre . "</strong>.";
+        $contenido .= "<p>Vence el <strong>" . $vigencia . "</strong>. Se debe solicitar la renovacion de la licencia con el Operador. </p>";
+        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hechp el trámite.</p>";
+        $contenido .= "<br><p>Solicita el archivo PDF actualizado para poder actualizar la licencia</p>";
+        $contenido .= "<br><p>Este correo fue enviado desde un sistemas automático de correos, NO CONTESTAR, esta dirección de correo no es administrada por una persona</p>";
+        $contenido .= "</html> ";
+
+        $mail->Body = $contenido;
+        $mail->send();
+    }
+
+    public function notificacionEmailLicenciaVencido($vigencia, $nombre) {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '708da5b85c715f';
+        $mail->Password = '809715d4523f4a';
+        
+        $mail->setFrom('notificaciones@mudanzasamado.mx');
+        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->Subject = 'Vencimiento';
+
+        //Set HTML
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $contenido = "<html>";
+        $contenido .= "<p>Se ha VENCIDO la licencia del Operador <strong>" . $nombre . "</strong>.";
+        $contenido .= "<p>Venció el <strong>" . $vigencia . "</strong>. El Operador NO puede ser asignado a viaje, hasta que se renueve la licencia. </p>";
+        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hechp el trámite.</p>";
+        $contenido .= "<br><p>Solicita el archivo PDF actualizado para poder actualizar la licencia</p>";
+        $contenido .= "<br><p>Este correo fue enviado desde un sistemas automático de correos, NO CONTESTAR, esta dirección de correo no es administrada por una persona</p>";
+        $contenido .= "</html> ";
+
+        $mail->Body = $contenido;
+        $mail->send();
+    }
 }
 

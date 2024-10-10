@@ -67,7 +67,7 @@ class PolizaController
         if (!is_auth()) {
             header('Location: /');
         }
-        $consulta = 'SELECT u.id, u.no_unidad FROM unidades u LEFT JOIN polizas p ON u.id = p.id_unidad WHERE p.id_unidad IS NULL;';
+        $consulta = 'SELECT u.id, u.no_unidad FROM unidades u LEFT JOIN polizas p ON u.id = p.id_unidad WHERE p.id_unidad IS NULL';
         $alertas = [];
         $mostrarLayout = true;
         $unidades = Unidad::SQL($consulta);
@@ -137,12 +137,7 @@ class PolizaController
     {
         $mostrarLayout = true;
         $alertas = [];
-        $id = $_GET['id'];
-        $id = filter_var($id, FILTER_VALIDATE_INT);
-
-        if (!$id) {
-            header('Location: /polizas');
-        }
+        $id = validarORedireccionar('/polizas');
         $poliza_unidad = PolizaUnidad::find($id);
         if (!$poliza_unidad) {
             header('Location: /polizas');
@@ -276,13 +271,10 @@ class PolizaController
     public static function actualizarPolizaRemolque(Router $router)
     {
         $mostrarLayout = true;
-        $id = $_GET['id'];
-        $id = filter_var($id, FILTER_VALIDATE_INT);
         $alertas = [];
 
-        if (!$id) {
-            header('Location: /polizas');
-        }
+        $id = validarORedireccionar('/polizas');
+
         $poliza_caja = PolizaCaja::find($id);
         if (!$poliza_caja) {
             header('Location: /polizas');

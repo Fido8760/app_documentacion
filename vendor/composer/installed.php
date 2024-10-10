@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'amd_025/appsalon',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '1726da692252f080b7b33b13c328058f01e1c0bd',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'amd_025/appsalon' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '1726da692252f080b7b33b13c328058f01e1c0bd',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

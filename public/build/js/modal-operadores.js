@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{async function e(e){console.log(e.target)}document.querySelectorAll("#mostrarModal").forEach((t=>{t.addEventListener("click",e)}))}));

@@ -23,8 +23,8 @@
                 </div>
                 
                 <div class="opciones">
-                    <button type="button" class="boton-aceptar">Acpetar</button>
                     <button type="button" class="quitar-modal">Cerrar</button>
+                    <button type="button" class="boton-aceptar">Acpetar</button>
                 </div>
             </div>
         `;

@@ -96,14 +96,13 @@ class VerifAmbientalController {
     }
 
     public static function actualizar(Router $router) {
+        if(!is_auth()){
+            header('Location: /');
+        }
         $mostrarLayout = true;
         $alertas = [];
-        $id = $_GET['id'];
-        $id = filter_var($id, FILTER_VALIDATE_INT);
+        $id = validarORedireccionar('/verif-ambiental');
 
-        if (!$id) {
-            header('Location: /polizas');
-        }
         $verificacion_amb = VerficacionAmbiental::find($id);
         if (!$verificacion_amb) {
             header('Location: /polizas');

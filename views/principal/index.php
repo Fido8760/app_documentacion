@@ -4,7 +4,7 @@
     <br>
     <div class="p-5 bg-light">
         <div class="container">  
-            <h1 class="display-3">Bienvenid@ <?php echo $nombre; ?></h1>
+            <h1 class="display-3">Bienvenid@ <?php echo $nombre;?></h1>
             <hr class="my-2">
             <p class="lead"></p>
             </div>

@@ -64,8 +64,12 @@ class CajaController {
         }
         $mostrarLayout = true;
 
-        if(!is_numeric($_GET['id'])) return;
-        $caja = Caja::find($_GET['id']);
+        $id = validarORedireccionar('/cajas');
+        $caja = Caja::find($id);
+
+        if(!$caja) {
+            header('Location:/cajas');
+        }
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {

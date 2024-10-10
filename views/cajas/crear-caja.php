@@ -3,7 +3,7 @@
     <div class="card formulario">
         <div class="card-header d-flex justify-content-between formulario__header">
             <h2 class="display-5 formulario__header--titulo"><?php echo $titulo; ?></h2>
-            <a href="/unidades" class="btn btn-info formulario__header--btn-volver">Volver</a>
+            <a href="/cajas" class="btn btn-info formulario__header--btn-volver">Volver</a>
         </div>
         <div class="card-body formulario__body">
             <h4 class="card-title formulario__body--titulo">Llena el formulario con los datos de la unidad a registrar</h4>

@@ -3,7 +3,7 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios'; 
-    protected static $columnasDB = ['nombre','password','email', 'token','apellido'];
+    protected static $columnasDB = ['nombre','password','email', 'token','apellido','id_rol'];
 
     public $id;
     public $nombre;
@@ -11,6 +11,8 @@ class Usuario extends ActiveRecord {
     public $email;
     public $token;
     public $apellido;
+    public $id_rol;
+    public $roles;
 
 
     public function __construct($args = [])
@@ -21,6 +23,7 @@ class Usuario extends ActiveRecord {
         $this->email = $args['email'] ?? '';
         $this->token = $args['token'] ?? null;
         $this->apellido = $args['apellido'] ?? '';
+        $this->id_rol = $args['id_rol'] ?? '';
 
     }
     //mensajes de validación para crear un usuario
@@ -36,6 +39,7 @@ class Usuario extends ActiveRecord {
             self::$alertas['error'][] = 'El email es obligatorio';
         }
 
+
         if(!$this->password) {
             self::$alertas['error'][] = 'El password es obligatorio';
         }
@@ -43,8 +47,10 @@ class Usuario extends ActiveRecord {
         if(strlen($this->password) < 6) {
             self::$alertas['error'][] = 'El password debe contener al menos 6 carácteres';
         }
+        
         return self::$alertas;
     }
+
 
     public function esxisteUsuario() {
         $query = "SELECT * FROM " . self::$tabla . " WHERE email = '". $this->email . "' LIMIT 1";

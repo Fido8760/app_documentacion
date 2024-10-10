@@ -41,8 +41,6 @@ class UnidadController {
             }
 
             $unidad->sincronizar($_POST);
-
-            //validar
             $alertas = $unidad->validar();
 
             if(empty($alertas)) {
@@ -70,12 +68,7 @@ class UnidadController {
         $alertas = [];
 
         //validar id
-        $id = $_GET['id'];
-        $id = filter_var($id, FILTER_VALIDATE_INT);
-
-        if(!$id) {
-            header('Location: /unidades');
-        }
+        $id = validarORedireccionar('/unidades');
         //unidad a editar
 
         $unidad = Unidad::find($id);

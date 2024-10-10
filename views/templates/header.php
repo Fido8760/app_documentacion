@@ -1,6 +1,6 @@
 <header class="dashboard__header">
     <div class="dashboard__header-grid">
-        <a class="dashboard__logo href="">
+        <a class="dashboard__logo" href="/principal">
             <h2 class="dashboard__logo--texto">Muebles Y Mudanzas Amado</h2>
         </a>
 

@@ -2,7 +2,7 @@
 
 <div class="card sombreado">
     <div class="card-header">
-        <a href="/cajas/crear" class="btn btn-primary btn-lg">Agregar Unidad</a>
+        <a href="/cajas/crear" class="btn btn-primary btn-lg">Agregar Remolque</a>
     </div>
     <div class="card-body">
         <div class="table-responsive tabla">
