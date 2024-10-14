@@ -40,7 +40,7 @@ class PolizaController
             $poliza->economico = $poliza->unidad->no_unidad ?? $poliza->caja->numero_caja ?? '';
             $poliza->placas = $poliza->unidad->u_placas ?? $poliza->caja->c_placas ?? '';
             $poliza->tipo = $poliza->unidad->tipo_unidad ?? $poliza->caja->capacidad ?? '';
-            $poliza->estatus = calcularEstatus($poliza->fe_final, $poliza->economico, $poliza->placas, $poliza->id); // Función para calcular el estatus
+            $poliza->estatus = calcularEstatusGenerico($poliza->fe_final, $poliza->id, __DIR__ . '/enviados.txt', null, $poliza->economico, $poliza->placas, 'poliza'); // Función para calcular el estatus
 
             // Verificar si es una unidad o una caja
             if ($poliza->unidad) {

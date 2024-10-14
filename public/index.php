@@ -156,7 +156,7 @@ $router->post('/operadores/crear', [OperadoresController::class, 'crear']);
 $router->get('/operadores/actualizar', [OperadoresController::class, 'actualizar']);
 $router->post('/operadores/actualizar', [OperadoresController::class, 'actualizar']);
 $router->post('/operadores/eliminar', [OperadoresController::class, 'eliminar']);
-$router->get('/api/operadores', [OperadoresController::class, 'info']);
+$router->get('/api/operadores/', [OperadoresController::class, 'info']);
 
 //puestos
 

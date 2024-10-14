@@ -127,7 +127,7 @@ class Email {
         $contenido = "<html>";
         $contenido .= "<p>Está por vencerse la licencia del Operador <strong>" . $nombre . "</strong>.";
         $contenido .= "<p>Vence el <strong>" . $vigencia . "</strong>. Se debe solicitar la renovacion de la licencia con el Operador. </p>";
-        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hechp el trámite.</p>";
+        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hecho el trámite.</p>";
         $contenido .= "<br><p>Solicita el archivo PDF actualizado para poder actualizar la licencia</p>";
         $contenido .= "<br><p>Este correo fue enviado desde un sistemas automático de correos, NO CONTESTAR, esta dirección de correo no es administrada por una persona</p>";
         $contenido .= "</html> ";
@@ -147,7 +147,7 @@ class Email {
         
         $mail->setFrom('notificaciones@mudanzasamado.mx');
         $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
-        $mail->Subject = 'Vencimiento';
+        $mail->Subject = 'Licencia Vencida';
 
         //Set HTML
         $mail->isHTML(true);
@@ -155,10 +155,71 @@ class Email {
         $contenido = "<html>";
         $contenido .= "<p>Se ha VENCIDO la licencia del Operador <strong>" . $nombre . "</strong>.";
         $contenido .= "<p>Venció el <strong>" . $vigencia . "</strong>. El Operador NO puede ser asignado a viaje, hasta que se renueve la licencia. </p>";
-        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hechp el trámite.</p>";
+        $contenido .= "<p>Presiona aquí para: <a href='http://localhost:3000/'>Actualizar Licencia de Operador</a> una vez hecho el trámite.</p>";
         $contenido .= "<br><p>Solicita el archivo PDF actualizado para poder actualizar la licencia</p>";
         $contenido .= "<br><p>Este correo fue enviado desde un sistemas automático de correos, NO CONTESTAR, esta dirección de correo no es administrada por una persona</p>";
         $contenido .= "</html> ";
+
+        $mail->Body = $contenido;
+        $mail->send();
+    }
+
+     //---------------------------------- Notificacion APTO --------------------------------------------
+
+     public function notificacionEmailAptoPorVencer($vigencia, $nombre) {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '708da5b85c715f';
+        $mail->Password = '809715d4523f4a';
+        
+        $mail->setFrom('notificaciones@mudanzasamado.mx');
+        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->Subject = 'Apto Médico Por Vencer';
+
+        //Set HTML
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $contenido = "<html>";
+        $contenido .= "<p>Estimado/a,</p>";
+        $contenido .= "<p>El <strong>APTO MÉDICO</strong> del Operador <strong>" . $nombre . "</strong> está próximo a vencer.</p>";
+        $contenido .= "<p>La fecha de vencimiento es el <strong>" . $vigencia . "</strong>. Por favor, solicita la renovación del apto médico del Operador a la brevedad.</p>";
+        $contenido .= "<p>Haz clic aquí para: <a href='http://localhost:3000/'>Actualizar el Apto Médico del Operador</a> una vez completado el trámite.</p>";
+        $contenido .= "<br><p>Recuerda solicitar el archivo PDF actualizado para proceder con la actualización.</p>";
+        $contenido .= "<br><p>Este correo ha sido enviado automáticamente, por favor no respondas. Esta dirección de correo no es monitoreada.</p>";
+        $contenido .= "</html>";
+
+        $mail->Body = $contenido;
+        $mail->send();
+    }
+
+    public function notificacionEmailAptoVencido($vigencia, $nombre) {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '708da5b85c715f';
+        $mail->Password = '809715d4523f4a';
+        
+        $mail->setFrom('notificaciones@mudanzasamado.mx');
+        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->Subject = 'Apto Vencido';
+
+        //Set HTML
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $contenido = "<html>";
+        $contenido .= "<p>Estimado/a,</p>";
+        $contenido .= "<p>El <strong>APTO MÉDICO</strong> del Operador <strong>" . $nombre . "</strong> se ha VENCIDO.</p>";
+        $contenido .= "<p>La fecha de vencimiento fue el <strong>" . $vigencia . "</strong>. El operador no puede ser asigando a viaje, hasta que obtenga su Apto Renovado.</p>";
+        $contenido .= "<p>Haz clic aquí para: <a href='http://localhost:3000/'>Actualizar el Apto Médico del Operador</a> una vez completado el trámite.</p>";
+        $contenido .= "<br><p>Recuerda solicitar el archivo PDF actualizado para proceder con la actualización.</p>";
+        $contenido .= "<br><p>Este correo ha sido enviado automáticamente, por favor no respondas. Esta dirección de correo no es monitoreada.</p>";
+        $contenido .= "</html>";
+
 
         $mail->Body = $contenido;
         $mail->send();

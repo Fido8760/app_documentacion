@@ -17,8 +17,10 @@ class OperadoresController {
         $mostrarLayout = true;
         $operadores = Operador::all();
         foreach($operadores as $operador) {
-            $operador->estatus_licencia = calcularEstatusLicencia($operador->vigencia_lic, $operador->nombre . ' ' . $operador->apellido_p . ' ' . $operador->apellido_m, $operador->id);
+            $operador->estatus_licencia = calcularEstatusGenerico($operador->vigencia_lic, $operador->id, __DIR__ . '/enviados_licencia.txt',$operador->nombre . ' ' . $operador->apellido_p . ' ' . $operador->apellido_m, null, null, 'licencia' );
+            $operador->estatus_apto = calcularEstatusGenerico($operador->vigencia_apto,  $operador->id, __DIR__ . '/enviados_apto.txt',$operador->nombre . ' ' . $operador->apellido_p . ' ' . $operador->apellido_m, null, null, 'apto');
         }
+
         $router->render('operadores/index',[
             'titulo' => 'Operadores',
             'mostrarLayout' => $mostrarLayout,
