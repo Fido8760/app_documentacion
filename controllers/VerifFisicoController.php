@@ -362,6 +362,22 @@ class VerifFisicoController {
                 header('Location: /verif-fisico?alert=success&action=delete');
             }
         }
-    }    
+    }
+    
+    public static function pdf() {
+        if (isset($_GET['pdf'])) {
+            $archivo = $_GET['pdf'];
+            $rutaArchivo = __DIR__ . '../../public/build/pdf/verif-fisico/' . $archivo; // Ajusta la ruta
+
+            if (file_exists($rutaArchivo)) {
+                // Establecer cabeceras para la descarga del archivo PDF
+                header('Content-Type: application/pdf');
+                header('Content-Disposition: inline; filename="' . basename($rutaArchivo) . '"');
+                header('Content-Length: ' . filesize($rutaArchivo));
+                readfile($rutaArchivo);
+                exit; // Termina el script después de enviar el archivo
+            }
+        }
+    }
     
 }

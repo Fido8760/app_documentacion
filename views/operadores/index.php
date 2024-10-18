@@ -25,22 +25,22 @@
                         <td class="eco"> <button class="boton-eco" id="mostrarModal" data-id="<?php echo $operador->id;?>"><?php echo $operador->nombre . " " . $operador->apellido_p . " " . $operador->apellido_m; ?></button>  </td>
                         <td>
                             <?php if(!empty($operador->subir_archivo_licencia)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/operadores/archivo?pdf=<?php echo urlencode($operador->subir_archivo_licencia); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($operador->subir_archivo_apto)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/operadores/archivo?pdf=<?php echo urlencode($operador->subir_archivo_apto); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($operador->subir_archivo_ine)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/operadores/archivo?pdf=<?php echo urlencode($operador->subir_archivo_ine); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($operador->subir_archivo_control)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/operadores/archivo?pdf=<?php echo urlencode($operador->subir_archivo_control); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>

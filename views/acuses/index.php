@@ -25,22 +25,22 @@
                         <td><?php echo $acuse->placas; ?></td>
                         <td>
                             <?php if(!empty($acuse->archivo_poliza_acuse)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/acuses/archivo?pdf=<?php echo urlencode($acuse->archivo_poliza_acuse); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($acuse->archivo_tarcirc_acuse)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/acuses/archivo?pdf=<?php echo urlencode($acuse->archivo_tarcirc_acuse); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($acuse->archivo_veriambiental_acuse)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/acuses/archivo?pdf=<?php echo urlencode($acuse->archivo_veriambiental_acuse); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>
                             <?php if(!empty($acuse->archivo_verifisico_acuse)) { ?>
-                                <button type="button" class="btn btn-lg btn-outline-info">PDF</button>
+                                <a href="/acuses/archivo?pdf=<?php echo urlencode($acuse->archivo_verifisico_acuse); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                             <?php } ?>
                         </td>
                         <td>

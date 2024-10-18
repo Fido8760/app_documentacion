@@ -26,7 +26,7 @@
                         <td><?php echo $tarjeta->fecha_exped;?></td>
                         <td ><?php echo $tarjeta->folio_tarjeta;?></td>
                         <td ><?php echo $tarjeta->permiso_sct;?></td>
-                        <td><button type="button" class="btn btn-lg btn-outline-info">PDF</button></td>
+                        <td><a href="/tarjetas-circulacion/archivo?pdf=<?php echo urlencode($tarjeta->subir_archivo_circulacion); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a></td>
                         <td>
                             <form action="/tarjetas-circulacion/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="<?php echo $tarjeta->url_detalle; ?>" role="button">Actualizar</a>

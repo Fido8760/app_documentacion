@@ -24,7 +24,7 @@
                         <td><?php echo $verificacion->placas;?></td>
                         <td ><span class="verif_folio-actual"><?php echo $verificacion->folio_fis;?></span></td>
                         <td ><span class="verif_fecha-actual"><?php echo $verificacion->fecha_verif_fis;?></span></td>
-                        <td><button type="button" class="btn btn-lg btn-outline-info">PDF</button></td>
+                        <td><a href="/verif-fisico/archivo?pdf=<?php echo urlencode($verificacion->subir_archivo_fisico); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a></td>
                         <td>
                             <form action="/verif-fisico/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="<?php echo $verificacion->url_detalle; ?>" role="button">Actualizar</a>

@@ -29,7 +29,7 @@
                         <td><?php echo $poliza->placas;?></td>
                         <td><?php echo $poliza->fe_final;?></td>
                         <td><span class="estatus"><?php echo $poliza->estatus;?></span></td>
-                        <td><button type="button" class="btn btn-lg btn-outline-secondary">PDF</button></td>
+                        <td><a href="/polizas/archivo?pdf=<?php echo urlencode($poliza->subir_archivo); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a></td>
                         <td>
                             <form action="/polizas/eliminar" method="POST">
                                 <a class="btn btn-lg btn-info" href="<?php echo $poliza->url_detalle; ?>" role="button">Actualizar</a>

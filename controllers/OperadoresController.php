@@ -92,10 +92,10 @@ class OperadoresController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Actualizar los archivos PDF y asignar a $_POST
-            $_POST['subir_archivo_licencia'] = manejarSubidaArchivo('acuses','subir_archivo_licencia', $pdfsAnteriores['subir_archivo_licencia']);
-            $_POST['subir_archivo_apto'] = manejarSubidaArchivo('acuses','subir_archivo_apto', $pdfsAnteriores['subir_archivo_apto']);
-            $_POST['subir_archivo_ine'] = manejarSubidaArchivo('acuses','subir_archivo_ine', $pdfsAnteriores['subir_archivo_ine']);
-            $_POST['subir_archivo_control'] = manejarSubidaArchivo('acuses','subir_archivo_control', $pdfsAnteriores['subir_archivo_control']);
+            $_POST['subir_archivo_licencia'] = manejarSubidaArchivo('operadores','subir_archivo_licencia', $pdfsAnteriores['subir_archivo_licencia']);
+            $_POST['subir_archivo_apto'] = manejarSubidaArchivo('operadores','subir_archivo_apto', $pdfsAnteriores['subir_archivo_apto']);
+            $_POST['subir_archivo_ine'] = manejarSubidaArchivo('operadores','subir_archivo_ine', $pdfsAnteriores['subir_archivo_ine']);
+            $_POST['subir_archivo_control'] = manejarSubidaArchivo('operadores','subir_archivo_control', $pdfsAnteriores['subir_archivo_control']);
             
             $operador->sincronizar($_POST);
             $alertas = $operador->validar();
@@ -147,6 +147,22 @@ class OperadoresController {
             $resultado = $operador->eliminar();
             if ($resultado) {
                 header('Location: /operadores?alert=success&action=delete');
+            }
+        }
+    }
+
+    public static function pdf() {
+        if (isset($_GET['pdf'])) {
+            $archivo = $_GET['pdf'];
+            $rutaArchivo = __DIR__ . '../../public/build/pdf/operadores/' . $archivo; // Ajusta la ruta
+
+            if (file_exists($rutaArchivo)) {
+                // Establecer cabeceras para la descarga del archivo PDF
+                header('Content-Type: application/pdf');
+                header('Content-Disposition: inline; filename="' . basename($rutaArchivo) . '"');
+                header('Content-Length: ' . filesize($rutaArchivo));
+                readfile($rutaArchivo);
+                exit; // Termina el script después de enviar el archivo
             }
         }
     }

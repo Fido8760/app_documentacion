@@ -17,7 +17,7 @@ class Email {
         $this->email = $email;
         $this->nombre = $nombre;
         $this->token = $token;
-        $this->token = $economico;
+        $this->economico = $economico;
         
     }
 
@@ -25,14 +25,15 @@ class Email {
 
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('cuentas@mudanzasamado.mx');
-        $mail->addAddress('cuentas@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress($this->email);
         $mail->Subject = 'Reestablece tu Password';
 
         //Set HTML
@@ -53,14 +54,15 @@ class Email {
     public function notificacionEmailPorVencer($vigencia, $economico, $placas) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Vencimiento';
 
         //Set HTML
@@ -81,14 +83,15 @@ class Email {
     public function notificacionEmailVencido($vigencia, $economico, $placas) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Vencimiento';
 
         //Set HTML
@@ -111,14 +114,15 @@ class Email {
     public function notificacionEmailLicenciaPorVencer($vigencia, $nombre) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Licencia Por Vencer';
 
         //Set HTML
@@ -139,14 +143,15 @@ class Email {
     public function notificacionEmailLicenciaVencido($vigencia, $nombre) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Licencia Vencida';
 
         //Set HTML
@@ -169,14 +174,15 @@ class Email {
      public function notificacionEmailAptoPorVencer($vigencia, $nombre) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Apto Médico Por Vencer';
 
         //Set HTML
@@ -198,14 +204,15 @@ class Email {
     public function notificacionEmailAptoVencido($vigencia, $nombre) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = 'mail.mudanzasamado.mx';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '708da5b85c715f';
-        $mail->Password = '809715d4523f4a';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Username = 'alertas@mudanzasamado.mx';
+        $mail->Password = 'Amado2024*';
         
-        $mail->setFrom('notificaciones@mudanzasamado.mx');
-        $mail->addAddress('notificaciones@mudanzasamado.mx', 'Sistema de Gestión de Archivos');
+        $mail->setFrom('alertas@mudanzasamado.mx', 'Cuentas Sistema de Gestión de Archivos Amado');
+        $mail->addAddress('soporte@mudanzasamado.mx');
         $mail->Subject = 'Apto Vencido';
 
         //Set HTML

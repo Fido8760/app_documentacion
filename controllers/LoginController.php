@@ -54,13 +54,17 @@ class LoginController {
         $alertas = [];
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auth = new Usuario($_POST);
+
+        
             $alertas = $auth->validarEmail();
 
             if(empty($alertas)) {
                 $usuario = Usuario::where('email', $auth->email);
+              
                 if($usuario){
                     //Generar Token de un solo uso
                     $usuario->crearToken();
+                    
                     $usuario->guardar();
                     //To Do: enviar el email
                     Usuario::setAlerta('exito', 'Correo enviado con éxito, revisa la bandeja de entrada de tu cuenta de correo' );

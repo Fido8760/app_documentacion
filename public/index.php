@@ -65,6 +65,7 @@ $router->get('/api/cajas/', [CajaController::class, 'info']);
 //-------------------CRUD Pólizas------------------------------
 //unidades
 $router->get('/polizas', [PolizaController::class, 'index']);
+$router->get('/polizas/archivo', [PolizaController::class, 'pdf']);
 $router->get('/polizas/crear-poliza-unidad', [PolizaController::class, 'crearPolizaUnidad']);
 $router->post('/polizas/crear-poliza-unidad', [PolizaController::class, 'crearPolizaUnidad']);
 $router->get('/polizas/actualizar-poliza-unidad', [PolizaController::class, 'actualizarPolizaUnidad']);
@@ -83,6 +84,7 @@ $router->get('/api/polizas/', [PolizaController::class, 'info']);
 //Verificaciones Ambientales
 
 $router->get('/verif-ambiental',[VerifAmbientalController::class, 'index']);
+$router->get('/verif-ambiental/archivo',[VerifAmbientalController::class, 'pdf']);
 $router->get('/verif-ambiental/crear',[VerifAmbientalController::class, 'crear']);
 $router->post('/verif-ambiental/crear',[VerifAmbientalController::class, 'crear']);
 $router->get('/verif-ambiental/actualizar',[VerifAmbientalController::class, 'actualizar']);
@@ -92,6 +94,8 @@ $router->post('/verif-ambiental/eliminar',[VerifAmbientalController::class, 'eli
 //------------------ CRUD Verificiaciones Fisico mecanicas ------------------------------
 
 $router->get('/verif-fisico', [VerifFisicoController::class, 'index']);
+$router->get('/verif-fisico/archivo',[VerifFisicoController::class, 'pdf']);
+
 
 //verificiacion fisico unidades
 $router->get('/verif-fisico/crearUnidad', [VerifFisicoController::class, 'crearUnidad']);
@@ -110,6 +114,7 @@ $router->post('/verif-fisico/actualizarCaja', [VerifFisicoController::class, 'ac
 //------------------ CRUD Verificiaciones Tarjetas de Circulación ------------------------------
 
 $router->get('/tarjetas-circulacion', [TarjetaCirculacionController::class, 'index']);
+$router->get('/tarjetas-circulacion/archivo', [TarjetaCirculacionController::class, 'pdf']);
 $router->get('/tarjetas-circulacion/crearUnidad', [TarjetaCirculacionController::class, 'crearUnidad']);
 $router->post('/tarjetas-circulacion/crearUnidad', [TarjetaCirculacionController::class, 'crearUnidad']);
 $router->get('/tarjetas-circulacion/actualizarUnidad', [TarjetaCirculacionController::class, 'actualizarUnidad']);
@@ -125,6 +130,7 @@ $router->post('/tarjetas-circulacion/eliminar', [TarjetaCirculacionController::c
 //Acuses
 
 $router->get('/acuses', [AcusesController::class, 'index']);
+$router->get('/acuses/archivo', [AcusesController::class, 'pdf']);
 
 $router->get('/acuses/crearUnidad', [AcusesController::class, 'crearUnidad']);
 $router->post('/acuses/crearUnidad', [AcusesController::class, 'crearUnidad']);
@@ -151,6 +157,7 @@ $router->post('/gps/eliminar', [GPSController::class, 'eliminar']);
 //Operadores
 
 $router->get('/operadores', [OperadoresController::class, 'index']);
+$router->get('/operadores/archivo', [OperadoresController::class, 'pdf']);
 $router->get('/operadores/crear', [OperadoresController::class, 'crear']);
 $router->post('/operadores/crear', [OperadoresController::class, 'crear']);
 $router->get('/operadores/actualizar', [OperadoresController::class, 'actualizar']);
