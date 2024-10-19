@@ -9,7 +9,7 @@
 
     async function obtenerDatos() {
         try {
-            const url = 'http://localhost:3000/api/polizas/';
+            const url = `${location.origin}/api/polizas/`;
             const resultado = await fetch(url);
 
             if (!resultado.ok) {

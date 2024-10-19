@@ -9,7 +9,7 @@
 
         async function obtenerDatos() {
             try {
-                const url = 'http://localhost:3000/api/cajas/';
+                const url = `${location.origin}/api/cajas/`;
                 const resultado = await fetch(url);
 
                 if (!resultado.ok) {

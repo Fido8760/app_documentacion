@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function exportarExcel() {
         try {
-            const url = '/api/polizas/';
+            const url = `${location.origin}/api/polizas/`;
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
 
