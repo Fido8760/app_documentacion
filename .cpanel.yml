@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - /home/mudanzd2/repositorios/app_documentacion/public/
-    - /bin/rsync -av public/ $DEPLOYPATH
