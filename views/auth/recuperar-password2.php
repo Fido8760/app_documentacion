@@ -7,6 +7,8 @@
     <?php  
         include __DIR__ . "/../templates/alertas.php";
     ?>
+
+    <?php if($token_valido) { ?>
     <form  method="POST" class="login__formulario">
         <div class="login__campo">
             <input type="password" class="login__campo--input" name="password" placeholder="Escribe tu nuevo Password">
@@ -15,8 +17,10 @@
             <a href="/" class="login__olvide--enlace">¿Ya tienes tu cuenta? Inicia Sesión</a>
         </div>
         <div class="login__submit">
-            <input type="submit" class="login__submit--boton" id="submit" value="Enviar Instrucciones">
+            <input type="submit" class="login__submit--boton" id="submit" value="Cambiar password">
         </div>
         
     </form>
+
+    <?php } ?>
 </div>

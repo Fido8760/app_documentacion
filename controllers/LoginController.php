@@ -54,8 +54,6 @@ class LoginController {
         $alertas = [];
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auth = new Usuario($_POST);
-
-        
             $alertas = $auth->validarEmail();
 
             if(empty($alertas)) {
@@ -92,11 +90,12 @@ class LoginController {
         $alertas = [];
         $error = false;
         $token = s($_GET['token']);
+        $token_valido = true;
         //buscar usuario por el token
         $usuario = Usuario::where('token', $token);
         if(empty($usuario)) {
-            Usuario::setAlerta('error', 'Token no válido');
-            $error = true;
+            Usuario::setAlerta('error', 'Token No Válido, intenta de nuevo');
+            $token_valido = false;
         }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -120,7 +119,8 @@ class LoginController {
         $alertas = Usuario::getAlertas();
         $router->render('auth/recuperar-password2', [
             'alertas' => $alertas,
-            'error' => $error
+            'error' => $error,
+            'token_valido' => $token_valido
         ]);
     }
 //----------------------------------------------------------------Administración y creación de usuarios-------------------------------------
