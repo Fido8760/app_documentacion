@@ -375,4 +375,25 @@ class PolizaController
             }
         }
     }
+    public static function pdf() {
+        if (isset($_GET['pdf'])) {
+            $archivo = basename($_GET['pdf']); // Asegúrate de sanitizar la entrada
+            //$rutaArchivo = '/home1/mudanzd2/app_documentacion/public/build/pdf/polizas/' . $archivo; --Ruta Abosluta para producción
+            $rutaArchivo = realpath(__DIR__ . '../../public/build/pdf/polizas/' . $archivo); // Ajusta la ruta
+    
+            // Verifica si el archivo existe
+            if (file_exists($rutaArchivo)) {
+                // Establecer cabeceras para la descarga del archivo PDF
+                header('Content-Type: application/pdf');
+                header('Content-Disposition: inline; filename="' . basename($rutaArchivo) . '"');
+                header('Content-Length: ' . filesize($rutaArchivo));
+                readfile($rutaArchivo);
+                exit; // Termina el script después de enviar el archivo
+            } else {
+                echo "El archivo no existe.";
+                exit;
+            }
+        }
+    }
+    
 }
