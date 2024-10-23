@@ -379,7 +379,7 @@ class PolizaController
         if (isset($_GET['pdf'])) {
             $archivo = basename($_GET['pdf']); // Asegúrate de sanitizar la entrada
             //$rutaArchivo = '/home1/mudanzd2/app_documentacion/public/build/pdf/polizas/' . $archivo; --Ruta Abosluta para producción
-            $rutaArchivo = realpath(__DIR__ . '../../public/build/pdf/polizas/' . $archivo); // Ajusta la ruta
+            $rutaArchivo = '/home1/mudanzd2/app_documentacion/public/build/pdf/polizas/' . $archivo; // Ajusta la ruta
     
             // Verifica si el archivo existe
             if (file_exists($rutaArchivo)) {

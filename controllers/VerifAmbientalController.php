@@ -208,7 +208,7 @@ class VerifAmbientalController {
     public static function pdf() {
         if (isset($_GET['pdf'])) {
             $archivo = $_GET['pdf'];
-            $rutaArchivo = __DIR__ . '../../public/build/pdf/verif-ambiental/' . $archivo; // Ajusta la ruta
+            $rutaArchivo = '/home1/mudanzd2/app_documentacion/public/build/pdf/verif-ambiental/' . $archivo; // Ajusta la ruta
 
             if (file_exists($rutaArchivo)) {
                 // Establecer cabeceras para la descarga del archivo PDF
