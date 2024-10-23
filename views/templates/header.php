@@ -10,4 +10,8 @@
             </form>
         </nav>
     </div>
+
+    <div class="dashboard__sidebar__menu-icon" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i> <!-- Ícono de hamburguesa -->
+    </div>
 </header>

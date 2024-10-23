@@ -1,4 +1,5 @@
 <aside class="dashboard__sidebar">
+   
     <nav class="dashboard__menu">
         <a href="/principal" class="dashboard__enlace <?php echo pagina_actual('/principal') ? 'dashboard__enlace--actual' : ''; ?>">
             <i class="fa-solid fa-house dashboard__icono"></i>
@@ -60,14 +61,6 @@
                 Operadores
             </span>
         </a>
-        <!--
-        <a href="/puestos" class="dashboard__enlace <?php echo pagina_actual('/puestos') ? 'dashboard__enlace--actual' : ''; ?>">
-            <i class="fa-solid fa-network-wired dashboard__icono"></i>
-            <span class="dashboard__menu-texto">
-                Puestos
-            </span>
-        </a>
-        -->
         <a href="/usuarios" class="dashboard__enlace <?php echo pagina_actual('/usuarios') ? 'dashboard__enlace--actual' : ''; ?>">
             <i class="fa-solid fa-users dashboard__icono"></i>
             <span class="dashboard__menu-texto">
@@ -77,3 +70,13 @@
     </nav>
 </aside>
 
+
+
+
+
+<?php
+$script = "
+    <script src='build/js/app.js'></script>
+
+"
+?>

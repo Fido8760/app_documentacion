@@ -87,12 +87,43 @@
 
     &__sidebar {
         background-color: lighten(v.$grisOscuro, 5%);
-        width: 16rem; // Mantener el ancho fijo del sidebar
-        flex-shrink: 0; // Evita que se reduzca
-        height: 100vh; // Sidebar ocupa toda la altura de la ventana
-        position: sticky; // Sidebar fijo
-        top: 0; // Posiciona el sidebar en la parte superior
+        width: 16rem;
+        flex-shrink: 0;
+        height: 100vh;
+        position: fixed; // Cambia a fixed para que salga de la pantalla
+        top: 0;
+        left: 0;
         padding: 1rem;
+        transform: translateX(-100%); // Ocultar sidebar fuera de la pantalla
+        transition: transform 0.3s ease, opacity 0.3s ease; // Suavizar la transición
+        opacity: 0; // No visible por defecto
+        visibility: hidden; // Asegurar que no se puede interactuar con él
+        z-index: 1000;
+
+        &.active {
+            transform: translateX(0); // Muestra el sidebar
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @include m.tablet {
+            position: sticky;
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            
+        }
+
+        &__menu-icon {
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            position: relative;
+            @include m.tablet {
+                display: none;
+            }
+        }
+        
     }
 
     &__contenido {

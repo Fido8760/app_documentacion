@@ -1,0 +1,1 @@
+function toggleSidebar(){document.querySelector(".dashboard__sidebar").classList.toggle("active")}
