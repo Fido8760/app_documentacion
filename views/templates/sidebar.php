@@ -69,14 +69,3 @@
         </a>
     </nav>
 </aside>
-
-
-
-
-
-<?php
-$script = "
-    <script src='build/js/app.js'></script>
-
-"
-?>
