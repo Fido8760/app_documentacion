@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="card-footer">
-    <button class="btn btn-success btn-lg" onclick="exportarExcel()">Exportar a Excel</button>
+        <button class="btn btn-success btn-lg" id="bontonExportarOperadores" >Exportar a Excel</button>
     </div>
 </div>
 
@@ -70,5 +70,6 @@ $script = "
     <script src='build/js/alertas.js'></script>
     <script src='build/js/modal-operadores.js'></script>
     <script src='build/js/datatable.js'></script>
+    <script src='build/js/exportarExcelOperadores.js'></script>
 "
 ?>

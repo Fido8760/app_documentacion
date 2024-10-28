@@ -59,7 +59,7 @@ $script = "
     <script src='build/js/modal-seleccion.js'></script>
     <script src='build/js/vencimiento.js'></script>
     <script src='build/js/datatable.js'></script>
-    <script src='build/js/exportarExcel.js'></script>
+    <script src='build/js/exportarExcelPolizas.js'></script>
     "
 ?>
 

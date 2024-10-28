@@ -49,7 +49,6 @@
 $script = "
     
     <script src='build/js/alertas.js'></script>
-    <script src='build/js/modal-usuario.js'></script>
     <script src='build/js/datatable.js'></script>
     "
 ?>
