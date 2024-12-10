@@ -26,13 +26,15 @@
                         <td ><span class="verif_fecha-actual"><?php echo $verificacion->fecha_verif_fis;?></span></td>
                         <td><a href="/verif-fisico/archivo?pdf=<?php echo urlencode($verificacion->subir_archivo_fisico); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a></td>
                         <td>
+                        <?php if($_SESSION['rol'] == '1'){ ?>
+
                             <form action="/verif-fisico/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="<?php echo $verificacion->url_detalle; ?>" role="button">Actualizar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $verificacion->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
-                           
+                        <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>

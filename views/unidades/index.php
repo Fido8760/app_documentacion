@@ -27,12 +27,15 @@
                         <td><?php echo $unidad->tipo_unidad;?></td>
                         <td><?php echo $unidad->u_marca;?></td>
                         <td>
-                            <form action="/unidades/eliminar" method="POST">
-                            <a class="btn btn-lg btn-info" href="/unidades/actualizar?id=<?php echo $unidad->id; ?>" role="button">Editar</a>
-                            |
-                                <input type="hidden" name="id" value="<?php echo $unidad->id; ?>">
-                                <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
-                            </form>
+                            <?php if($_SESSION['rol'] == '1'){ ?>
+                                
+                                <form action="/unidades/eliminar" method="POST">
+                                <a class="btn btn-lg btn-info" href="/unidades/actualizar?id=<?php echo $unidad->id; ?>" role="button">Editar</a>
+                                |
+                                    <input type="hidden" name="id" value="<?php echo $unidad->id; ?>">
+                                    <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
+                                </form>
+                            <?php } ?>
                            
                         </td>
                     </tr>

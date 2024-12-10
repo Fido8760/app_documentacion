@@ -16,11 +16,11 @@ function mostrarAlerta() {
     // Si hay un tipo de alerta, se muestra según el tipo de acción realizada
     if (alertType === 'success') {
         if (action === 'create') {
-            Swal.fire('¡Documento creado!', 'El documento se ha creado correctamente.', 'success');
+            Swal.fire('Elemento creado!', 'Sa creado correctamente.', 'success');
         } else if (action === 'update') {
-            Swal.fire('¡Documento actualizado!', 'El documento se ha actualizado correctamente.', 'success');
+            Swal.fire('Elemento actualizado!', 'Se ha actualizado correctamente.', 'success');
         } else if (action === 'delete') {
-            Swal.fire('¡Documento eliminado!', 'El documento se ha eliminado correctamente.', 'success');
+            Swal.fire('Elemento eliminado!', 'Se ha eliminado correctamente.', 'success');
         }
     } else if (alertType === 'error') {
         Swal.fire('Error', 'Hubo un problema al realizar la operación.', 'error');

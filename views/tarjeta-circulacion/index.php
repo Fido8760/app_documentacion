@@ -28,13 +28,16 @@
                         <td ><?php echo $tarjeta->permiso_sct;?></td>
                         <td><a href="/tarjetas-circulacion/archivo?pdf=<?php echo urlencode($tarjeta->subir_archivo_circulacion); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a></td>
                         <td>
+                        <?php if($_SESSION['rol'] == '1'){ ?>
+
                             <form action="/tarjetas-circulacion/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="<?php echo $tarjeta->url_detalle; ?>" role="button">Actualizar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $tarjeta->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
-                           
+                        <?php }?>
+                        
                         </td>
                     </tr>
                 <?php } ?>

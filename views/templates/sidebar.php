@@ -1,3 +1,5 @@
+<?php //debuguear($_SESSION)?>
+
 <aside class="dashboard__sidebar">
     <nav class="dashboard__menu">
         <a href="/principal" class="dashboard__enlace <?php echo pagina_actual('/principal') ? 'dashboard__enlace--actual' : ''; ?>">
@@ -61,7 +63,7 @@
             </a>
         <?php endif; ?>
 
-        <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3): // Administrador y Recursos Humanos ?>
+        <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3): // Administrador y Recursos Humanos ?>
             <a href="/operadores" class="dashboard__enlace <?php echo pagina_actual('/operadores') ? 'dashboard__enlace--actual' : ''; ?>">
                 <i class="fa-regular fa-id-card dashboard__icono"></i>
                 <span class="dashboard__menu-texto">

@@ -44,12 +44,15 @@
                             <?php } ?>
                         </td>
                         <td>
+                        <?php if($_SESSION['rol'] == '1'){ ?>
+
                             <form action="/acuses/eliminar" method="POST">
                                 <a class="btn btn-lg btn-info" href="<?php echo $acuse->url_detalle; ?>" role="button">Actualizar</a>
                                 |
                                 <input type="hidden" name="id" value="<?php echo $acuse->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
+                        <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>

@@ -30,13 +30,15 @@
                         <td ><span class="verif_fecha-anterior"><?php echo $verificacion->anterior->fecha_verif_ant ?? '';?></span></td>
                         <td><a href="/verif-ambiental/archivo?pdf=<?php echo urlencode($verificacion->subir_archivo_amb); ?>" type="button" class="btn btn-lg btn-outline-secondary" target="_blank">PDF</a>
                         <td>
+                        <?php if($_SESSION['rol'] == '1'){ ?>
+                            
                             <form action="/verif-ambiental/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="/verif-ambiental/actualizar?id=<?php echo $verificacion->id; ?>" role="button">Editar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $verificacion->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
-                           
+                        <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>

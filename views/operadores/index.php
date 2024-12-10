@@ -44,12 +44,15 @@
                             <?php } ?>
                         </td>
                         <td>
+                        <?php if($_SESSION['rol'] == '1' || $_SESSION['rol'] == '3'){ ?>
+
                             <form action="/operadores/eliminar" method="POST">
                             <a class="btn btn-lg btn-info"href="/operadores/actualizar?id=<?php echo $operador->id; ?>" role="button">Actualizar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $operador->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" href="" role="button">Eliminar</button>
                             </form>
+                        <?php } ?>
                            
                         </td>
                     </tr>

@@ -27,13 +27,15 @@
                         <td><?php echo $caja->capacidad;?></td>
                         <td><?php echo $caja->c_marca;?></td>
                         <td>
+                        <?php if($_SESSION['rol'] == '1'){ ?>
+
                             <form action="/cajas/eliminar" method="POST">
                             <a class="btn btn-lg btn-info" href="/cajas/actualizar?id=<?php echo $caja->id; ?>" role="button">Editar</a>
                             |
                                 <input type="hidden" name="id" value="<?php echo $caja->id; ?>">
                                 <button type="submit" class="btn btn-lg btn-danger btn-eliminar" role="button">Eliminar</button>
                             </form>
-                           
+                        <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>
