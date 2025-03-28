@@ -17,7 +17,7 @@
 
 
                 <div class="d-grid gap-2 col-6 mx-auto formulario__footer">
-                    <input type="submit" class="btn btn-primary formulario__footer--btn-registrar" value="Registrar Póliza de Unidad"></input>
+                    <input type="submit" class="btn btn-primary formulario__footer--btn-registrar" value="Registrar Póliza de Remolque"></input>
                 </div>
             </form>
         </div>

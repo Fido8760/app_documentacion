@@ -24,6 +24,7 @@ class Operador extends ActiveRecord {
     public $vigencia_apto;
     public $id_puesto;
     public $estatus_licencia;
+    public $estatus_apto;
     
 
     public function __construct($args = [])
@@ -43,6 +44,8 @@ class Operador extends ActiveRecord {
         $this->vigencia_lic = $args['vigencia_lic'] ?? '';
         $this->vigencia_apto = $args['vigencia_apto'] ?? '';
         $this->id_puesto = $args['id_puesto'] ?? '';
+        $this->estatus_licencia = $args['estatus_licencia'] ?? null; // <-- Agrega esto
+        $this->estatus_apto = $args['estatus_apto'] ?? null;
     }
 
     public function validar() {

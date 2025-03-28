@@ -10,7 +10,20 @@ use Model\Unidad;
 use MVC\Router;
 
 class TarjetaCirculacionController {
+    public static function info() {
+        $tarjetas = TarjetaCirculacion::all();
+        foreach($tarjetas as $tarjeta) {
+            $tarjeta->unidad = Unidad::find($tarjeta->id_unidad);
+            $tarjeta->caja = Caja::find($tarjeta->id_caja);
+
+            $tarjeta->economico = $tarjeta->unidad->no_unidad ?? $tarjeta->caja->numero_caja ?? '';
+            $tarjeta->placas = $tarjeta->unidad->u_placas ?? $tarjeta->caja->c_placas ?? '';
+        }
+        
+        echo json_encode($tarjetas);
+    }
     public static function index(Router $router) {
+        
         if(!is_auth()){
             header('Location: /');
         }

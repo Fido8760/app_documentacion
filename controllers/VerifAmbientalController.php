@@ -8,6 +8,14 @@ use Model\VerficacionAmbiental;
 use Model\VerficacionAmbientalAnt;
 
 class VerifAmbientalController {
+    public static function info() {
+        $verificaciones_amb = VerficacionAmbiental::all();
+        foreach ($verificaciones_amb as $verif_amb) {
+            $verif_amb->unidad = Unidad::find($verif_amb->id_unidad_ver);
+        }
+
+        echo json_encode($verificaciones_amb);
+    }
     
     public static function index(Router $router) {
         if(!is_auth()){

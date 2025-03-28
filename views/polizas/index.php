@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="card-footer">
-    <button class="btn btn-success btn-lg" id="bontonExportar" >Exportar a Excel</button>
+        <button class="btn btn-success btn-lg" id="bontonExportar" >Exportar a Excel</button>
     </div>
 </div>
 

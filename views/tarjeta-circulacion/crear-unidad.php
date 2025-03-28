@@ -17,7 +17,7 @@
 
 
                 <div class="d-grid gap-2 col-6 mx-auto formulario__footer">
-                    <input type="submit" class="btn btn-primary formulario__footer--btn-registrar" value="Registrar Remolque"></input>
+                    <input type="submit" class="btn btn-primary formulario__footer--btn-registrar" value="Registrar Tarjeta de Circulación de Unidad"></input>
                 </div>
             </form>
         </div>

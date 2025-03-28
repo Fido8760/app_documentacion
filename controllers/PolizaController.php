@@ -9,10 +9,9 @@ use Model\Unidad;
 use Model\PolizaCaja;
 use Model\PolizaUnidad;
 
-class PolizaController
-{
-    public static function info()
-    {
+class PolizaController {
+    public static function info() {
+        
         $polizas = Poliza::all();
         foreach ($polizas as $poliza) {
 
@@ -26,6 +25,7 @@ class PolizaController
 
         echo json_encode($polizas);
     }
+
     public static function index(Router $router)
     {
         if (!is_auth()) {

@@ -10,6 +10,18 @@ use Model\VerificacionFisicoUnidad;
 use Model\VerificacionFisicoRemolque;
 
 class VerifFisicoController {
+    public static function info() {
+        $verificaciones_fisico = VerificacionFisico::all();
+        foreach( $verificaciones_fisico as $ver_fisico) {
+            $ver_fisico->unidad = Unidad::find($ver_fisico->id_unidad);
+            $ver_fisico->caja = Caja::find($ver_fisico->id_caja);
+
+            $ver_fisico->placas = $ver_fisico->unidad->u_placas ?? $ver_fisico->caja->c_placas;
+            $ver_fisico->economico = $ver_fisico->unidad->no_unidad ?? $ver_fisico->caja->numero_caja ?? '';
+
+        }
+        echo json_encode($verificaciones_fisico);
+    }
     public static function index(Router $router) {
         if(!is_auth()){
             header('Location: /');

@@ -1,4 +1,8 @@
-<?php //debuguear($_SESSION)?>
+<?php 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 
 <aside class="dashboard__sidebar">
     <nav class="dashboard__menu">

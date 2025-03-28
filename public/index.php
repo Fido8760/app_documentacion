@@ -91,6 +91,11 @@ $router->get('/verif-ambiental/actualizar',[VerifAmbientalController::class, 'ac
 $router->post('/verif-ambiental/actualizar',[VerifAmbientalController::class, 'actualizar']);
 $router->post('/verif-ambiental/eliminar',[VerifAmbientalController::class, 'eliminar']);
 
+//Api Verificaciones Amb
+$router->get('/api/verif-ambiental/', [VerifAmbientalController::class, 'info']);
+
+
+
 //------------------ CRUD Verificiaciones Fisico mecanicas ------------------------------
 
 $router->get('/verif-fisico', [VerifFisicoController::class, 'index']);
@@ -110,6 +115,8 @@ $router->post('/verif-fisico/crearCaja', [VerifFisicoController::class, 'crearCa
 $router->get('/verif-fisico/actualizarCaja', [VerifFisicoController::class, 'actualizarCaja']);
 $router->post('/verif-fisico/actualizarCaja', [VerifFisicoController::class, 'actualizarCaja']);
 
+//Api verifisico
+$router->get('/api/verif-fisico/', [VerifFisicoController::class, 'info']);
 
 //------------------ CRUD Verificiaciones Tarjetas de Circulación ------------------------------
 
@@ -126,6 +133,9 @@ $router->get('/tarjetas-circulacion/actualizarCaja', [TarjetaCirculacionControll
 $router->post('/tarjetas-circulacion/actualizarCaja', [TarjetaCirculacionController::class, 'actualizarCaja']);
 
 $router->post('/tarjetas-circulacion/eliminar', [TarjetaCirculacionController::class, 'eliminar']);
+
+//Api Tarjetas
+$router->get('/api/tarjetas-circulacion/', [TarjetaCirculacionController::class, 'info']);
 
 //Acuses
 

@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="card-footer">
-    <button class="btn btn-success btn-lg" onclick="exportarExcel()">Exportar a Excel</button>
+        <button class="btn btn-success btn-lg" id="bontonExportar" >Exportar a Excel</button>
     </div>
 </div>
 
@@ -58,5 +58,7 @@ $script = "
     <script src='build/js/alertas.js'></script>
     <script src='build/js/modal-unidad.js'></script>
     <script src='build/js/datatable.js'></script>
+    <script src='build/js/exportarExcelVerifAmb.js'></script>
+
     "
 ?>

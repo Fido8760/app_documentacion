@@ -1,4 +1,5 @@
 <?php 
+    
     foreach($alertas as $key=> $alerta) {
         foreach ($alerta as $mensaje){
 ?>
