@@ -11,7 +11,7 @@
             <div class="formulario__body--alertas"><?php include_once __DIR__ . '/../templates/alertas.php' ?></div>
 
 
-            <form action="/verif-fisico/crear" method="POST" enctype="multipart/form-data">
+            <form action="/verif-ambiental/crear" method="POST" enctype="multipart/form-data">
 
                 <?php include_once __DIR__ . '/formulario-ambiental.php' ?>
 

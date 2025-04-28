@@ -11,7 +11,7 @@
             <div class="formulario__body--alertas"><?php include_once __DIR__ . '/../templates/alertas.php' ?></div>
 
 
-            <form action="/cajas/crear" method="POST">
+            <form method="POST">
 
                 <?php include_once __DIR__ . '/formulario-caja.php' ?>
 
