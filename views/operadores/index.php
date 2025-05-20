@@ -13,8 +13,8 @@
                         <th scope="col">OPERADOR</th>
                         <th scope="col">LICENCIA</th>
                         <th scope="col">APTO</th>
-                        <th scope="col">R-CONTROL</th>
                         <th scope="col">INE</th>
+                        <th scope="col">R-CONTROL</th>
                         <th scope="col">ACCIONES</th>
                     </tr>
                 </thead>
